@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>javascript内建对象 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="一、Object类型
+JavaScript中所有对象都继承自Object类型，对象字面量属于Object类型。Object类型拥有一些基本的属性和方法：
+
+constructor属性：指向初始化对象的构造函数；
+toString方法：对象向字符串转换时调用的方法；
+valueOf方法：对象向基本数据类型转换时调用的方法，未必转换为数字；
+hasOwnProperty方法和isProprotypeOf方法。
+
+二、基本包装类型Boolean、Number和String
+
+可以通过new运算符生成包装类型的实例；
+typeof运算结果为object；
+有相应的属性和方法可以调用；
+一般不建议使用Boolean和Number实例；
+系统会隐含地进行String基本类型和包装类型的转换，所以总体而言一般没有必要特别注意基本类型和包装类型。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="javascript内建对象"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-29T06:10:13.000Z"><a href="/2013/06/29/Javascript-buildin-objects/">Jun 29 2013</a></time>
+      
+      
+  
+    <h1 class="title">javascript内建对象</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、Object类型">一、Object类型</h3>
+<p>JavaScript中所有对象都继承自Object类型，对象字面量属于Object类型。Object类型拥有一些基本的属性和方法：</p>
+<ol>
+<li>constructor属性：指向初始化对象的构造函数；</li>
+<li>toString方法：对象向字符串转换时调用的方法；</li>
+<li>valueOf方法：对象向基本数据类型转换时调用的方法，未必转换为数字；</li>
+<li>hasOwnProperty方法和isProprotypeOf方法。</li>
+</ol>
+<h3 id="二、基本包装类型Boolean、Number和String">二、基本包装类型Boolean、Number和String</h3>
+<ol>
+<li>可以通过new运算符生成包装类型的实例；</li>
+<li>typeof运算结果为object；</li>
+<li>有相应的属性和方法可以调用；</li>
+<li>一般不建议使用Boolean和Number实例；</li>
+<li>系统会隐含地进行String基本类型和包装类型的转换，所以总体而言一般没有必要特别注意基本类型和包装类型。</li>
+</ol>
+<a id="more"></a>
+
+<h3 id="三、Array类型">三、Array类型</h3>
+<ol>
+<li>所有数组都是Array类型实例，可以使用new关键字方式创建数组。</li>
+<li>数组的操作有：<br> (1)push、pop方法：数组尾部操作；<br> (2)shift、unshift方法：数组头部操作；<br> (3)splice方法：数组中部操作：<pre><code> a. 删除：<span class="keyword">splice</span>（起始项，删除数）；
+ b. 插入：<span class="keyword">splice</span>（起始项，<span class="number">0</span>，插入项<span class="number">1</span>，……）；
+ c. 替换：<span class="keyword">splice</span>（起始项，删除数，替换项<span class="number">1</span>，……）；
+ d. 返回值是被删除的数组；
+</code></pre> (4)join方法：把数组串成字符串；<br> (5)split方法：把字符串分割为数组；<br> (6)reverse方法：数组倒置；<br> (7)sort方法：数组排序，传入比较函数为参数；<br> (8)concat方法：数组串接；<br> (9)slice方法：获取子数组。</li>
+</ol>
+<h3 id="四、Global对象及Math对象">四、Global对象及Math对象</h3>
+<ol>
+<li>Math对象为数学公式和信息提供了属性和方法。</li>
+<li>不属于其他对象的属性和方法都属于Global对象，所有全局变量和函数都是Global对象的属性和函数。</li>
+<li>eval方法：相当于完整的JavaScript解释器，是最强大的函数，谨慎使用。</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Javascript/">Javascript</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2013/06/29/Javascript-buildin-objects/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

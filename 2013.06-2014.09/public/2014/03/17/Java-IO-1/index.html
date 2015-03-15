@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java I/O(一)——概述 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="Java IO一般包含两个部分：java.io包中堵塞型IO；java.nio包中的非堵塞型IO，通常称为New IO。系统运行的瓶颈一般在于IO操作，一般打开某个IO通道需要大量的时间，同时端口中不一定就有足够的数据，这样read方法就一直等待读取此端口的内容，从而浪费大量的系统资源。此时可能会想">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Java I/O(一)——概述"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-17T08:17:18.000Z"><a href="/2014/03/17/Java-IO-1/">Mar 17 2014</a></time>
+      
+      
+  
+    <h1 class="title">Java I/O(一)——概述</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Java IO一般包含两个部分：java.io包中堵塞型IO；java.nio包中的非堵塞型IO，通常称为New IO。系统运行的瓶颈一般在于IO操作，一般打开某个IO通道需要大量的时间，同时端口中不一定就有足够的数据，这样read方法就一直等待读取此端口的内容，从而浪费大量的系统资源。此时可能会想到使用java 的多线程技术，但是在当前进程中创建线程也是要花费一定的时间和系统资源的，因此不一定可取。Java New IO的非堵塞技术主要采用了Observer模式，就是有一个具体的观察者监测IO端口，如果有数据进入就会立即通知相应的应用程序。这样我们就避免建立多个线程，同时也避免了read等待的时间。</p>
+<p>本篇主要讲述java的堵塞型IO，java.io包中有着众多的类和接口，大概可以分为三部分：1、流式部分，即IO的主体部分；2、非流式部分，主要包含一些辅助流式部分的类，如：File、RandomAccessFile和FileDescriptor等；3、文件读取部分的与安全相关的类，如：SerializablePermission类。流式部分可以概括为：两个对应一个桥梁。两个对应指：字节流(Byte Stream)和字符流(Char Stream)的对应；输入和输出的对应。一个桥梁指：从字节流到字符流的桥梁，对应于输入和输出为 InputStreamReader 和 OutputStreamWriter。</p>
+<p>在流的具体类中又可以具体分为介质流和过滤流。介质流(Media Stream 或者称为原始流Raw Stream)主要指一些基本的流，他们主要是从具体的介质上，如：文件、内存缓冲区(Byte 数组、Char 数组、StringBuffer 对象)等，读取数据；过滤流(Filter Stream)主要指所有 FilterInputStream/FilterOutputStream 和 FilterReader/FilterWriter 的子类，主要是对其包装的类进行某些特定的处理，如：缓存等。</p>
+<h3 id="参考文章">参考文章</h3>
+<p><a href="http://blog.csdn.net/ilibaba/article/details/3955799" target="_blank" rel="external">java中的io系统详解</a><br><a href="http://m.blog.csdn.net/blog/baobeiSimple/1713797" target="_blank" rel="external">Java IO</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Java/">Java</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2014/03/17/Java-IO-1/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python抓取图片 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="抓的是豆瓣妹子的图片。
+12345678910111213141516171819202122232425262728293031323334import threadingimport urllib.requestimport re, os class dbmeiziCrawler(threadi">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Python抓取图片"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-30T07:28:56.000Z"><a href="/2014/04/30/Python-picture-crawler/">Apr 30 2014</a></time>
+      
+      
+  
+    <h1 class="title">Python抓取图片</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>抓的是豆瓣妹子的图片。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> threading</div><div class="line"><span class="keyword">import</span> urllib.request</div><div class="line"><span class="keyword">import</span> re, os</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">dbmeiziCrawler</span><span class="params">(threading.Thread)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, startpage, endpage, imgdir)</span>:</span></div><div class="line">        threading.Thread.__init__(self, name=name)</div><div class="line">        self.startpage = startpage</div><div class="line">        self.endpage = endpage</div><div class="line">        self.imgdir = imgdir</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">for</span> page <span class="keyword">in</span> range(self.startpage, self.endpage + <span class="number">1</span>):</div><div class="line">            pageurl = <span class="string">'http://dbmeizi.com/?p='</span> + str(page)</div><div class="line">            pagehtml = urllib.request.urlopen(pageurl).read().decode(<span class="string">'utf-8'</span>)</div><div class="line">            reg = <span class="string">'http://pic.dbmeizi.com/pics/\d+/p\d+\.jpg'</span></div><div class="line">            imgurllist = re.findall(reg, pagehtml)</div><div class="line">         </div><div class="line">            <span class="keyword">for</span> imgurl <span class="keyword">in</span> imgurllist:</div><div class="line">                imgname = imgurl[imgurl.rfind(<span class="string">'/'</span>) + <span class="number">1</span>:]</div><div class="line">                urllib.request.urlretrieve(imgurl, self.imgdir + imgname)</div><div class="line">                print(self.name + <span class="string">'\t'</span> + imgurl)</div><div class="line"> </div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    maxpage = <span class="number">300</span></div><div class="line">    pages_each_thread = <span class="number">20</span></div><div class="line">    tasknums = maxpage // pages_each_thread + (<span class="number">0</span> <span class="keyword">if</span> maxpage % pages_each_thread == <span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span>)</div><div class="line">     </div><div class="line">    imgdir = os.getcwd() + <span class="string">'/dbmeizi/'</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(imgdir):</div><div class="line">        os.mkdir(imgdir)</div><div class="line"> </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, tasknums + <span class="number">1</span>):</div><div class="line">        dbmeiziCrawler(<span class="string">'task'</span> + str(i), (i - <span class="number">1</span>) * pages_each_thread, i * pages_each_thread - <span class="number">1</span>, imgdir).start()</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Python/">Python</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2014/04/30/Python-picture-crawler/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

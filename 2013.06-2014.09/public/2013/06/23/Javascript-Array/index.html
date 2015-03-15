@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Javascript数组 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="一、数组特点
+
+JavaScript中的数组不是一段连续内存集合，而是拥有类数组特性的对象
+JavaScript中的数组可以混合存储任意类型的数据
+JavaScript中的数组大小可动态变化
+JavaScript中的数组是稀疏数组，亦即下标不必是连续的，但仅有真正存储的内容获得内存空间
+
+二、数组的创建
+
+单纯创建数组：var arr=new Array();
+创建数组的同时规定数组大小：var arr=new Array(10);
+直接初始化：var arr=new Array(“love”,”hate”,”pain”); 或 var arr=[“happy”,”cute”,”scare”];
+多维数组：var matrix = [ [1,2,3], [4,5,6], [7,8,9] ]; window.alert(matrix[2][1]);">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Javascript数组"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-23T06:48:51.000Z"><a href="/2013/06/23/Javascript-Array/">Jun 23 2013</a></time>
+      
+      
+  
+    <h1 class="title">Javascript数组</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、数组特点">一、数组特点</h3>
+<ol>
+<li>JavaScript中的数组不是一段连续内存集合，而是拥有类数组特性的对象</li>
+<li>JavaScript中的数组可以混合存储任意类型的数据</li>
+<li>JavaScript中的数组大小可动态变化</li>
+<li>JavaScript中的数组是稀疏数组，亦即下标不必是连续的，但仅有真正存储的内容获得内存空间</li>
+</ol>
+<p>二、数组的创建</p>
+<ol>
+<li>单纯创建数组：var arr=new Array();</li>
+<li>创建数组的同时规定数组大小：var arr=new Array(10);</li>
+<li>直接初始化：var arr=new Array(“love”,”hate”,”pain”); 或 var arr=[“happy”,”cute”,”scare”];</li>
+<li>多维数组：var matrix = [ [1,2,3], [4,5,6], [7,8,9] ]; window.alert(matrix[2][1]);<a id="more"></a>
+
+</li>
+</ol>
+<h3 id="三、数组元素的访问">三、数组元素的访问</h3>
+<ol>
+<li>var testGetArrValue=arrayObj[1]; //获取数组的元素值</li>
+<li>arrayObj[1]= “这是新值”; //给数组元素赋予新的值，当所用下标大于已用下标最大值时，会创建一个新元素</li>
+</ol>
+<h3 id="四、数组元素的添加">四、数组元素的添加</h3>
+<ol>
+<li>arrayObj.push([item1 [item2 [. . . [itemN ]]]]);// 将一个或多个新元素添加到数组结尾，并返回数组新长度</li>
+<li>arrayObj.unshift([item1 [item2 [. . . [itemN ]]]]);// 将一个或多个新元素添加到数组开始，数组中的元素自动后移，返回数组新长度</li>
+<li>arrayObj.splice(insertPos,0,[item1[, item2[, . . . [,itemN]]]]);//将一个或多个新元素插入到数组的指定位置，插入位置的元素自动后移，返回””</li>
+</ol>
+<h3 id="五、数组元素的删除">五、数组元素的删除</h3>
+<ol>
+<li>arrayObj.pop(); //移除最后一个元素并返回该元素值</li>
+<li>arrayObj.shift(); //移除最前一个元素并返回该元素值，数组中元素自动前移</li>
+<li>arrayObj.splice(deletePos,deleteCount); //删除从指定位置deletePos开始的指定数量deleteCount的元素，数组形式返回所移除的元素</li>
+</ol>
+<h3 id="六、数组的截取与合并">六、数组的截取与合并</h3>
+<ol>
+<li>arrayObj.slice(start, [end]); //以数组的形式返回数组的一部分，注意不包括 end 对应的元素，如果省略 end 将复制 start 之后的所有元素</li>
+<li>arrayObj.concat([item1[, item2[, . . . [,itemN]]]]); //将多个数组（也可以是字符串，或者是数组和字符串的混合）连接为一个数组，返回连接好的新的数组</li>
+</ol>
+<h3 id="七、数组的拷贝">七、数组的拷贝</h3>
+<ol>
+<li>arrayObj.slice(0); //返回数组的拷贝数组，注意是一个新的数组，不是指向</li>
+<li>arrayObj.concat(); //返回数组的拷贝数组，注意是一个新的数组，不是指向</li>
+</ol>
+<h3 id="八、数组元素的排序">八、数组元素的排序</h3>
+<ol>
+<li>arrayObj.reverse(); //反转元素（最前的排到最后、最后的排到最前），返回数组地址</li>
+<li>arrayObj.sort(); //对数组元素排序，返回数组地址</li>
+</ol>
+<h3 id="九、数组元素的字符串化">九、数组元素的字符串化</h3>
+<ol>
+<li>arrayObj.join(separator); //返回字符串，这个字符串将数组的每一个元素值连接在一起，中间用 separator 隔开</li>
+<li>toLocaleString 、toString 、valueOf：可以看作是join的特殊用法，不常用</li>
+</ol>
+<h3 id="十、数组对象的三个属性">十、数组对象的三个属性</h3>
+<h4 id="1-length属性">1.length属性</h4>
+<p>length属性表示数组的长度，即其中元素的个数。因为数组的索引总是由0开始，所以一个数组的上下限分别是：0和length-1。和其他大多数语言不同的是，JavaScript数组的length属性是可变的，这一点需要特别注意。当length属性被设置得更大时，整个数组的状态事实上不会发生变化，仅仅是length属性变大；当length属性被设置得比原来小时，则原先数组中索引大于或等于length的元素的值全部被丢失。下面是演示改变length属性的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr=[<span class="number">12</span>,<span class="number">23</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">25</span>,<span class="number">98</span>,<span class="number">76</span>,<span class="number">54</span>,<span class="number">56</span>,<span class="number">76</span>]; <span class="comment">//定义了一个包含10个数字的数组</span></div><div class="line">alert(arr.length);<span class="comment">//显示数组的长度10</span></div><div class="line">arr.length=<span class="number">12</span>;<span class="comment">//增大数组的长度</span></div><div class="line">alert(arr.length);<span class="comment">//显示数组的长度已经变为12</span></div><div class="line">alert(arr[<span class="number">8</span>]);<span class="comment">//显示第9个元素的值，为56</span></div><div class="line">arr.length=<span class="number">5</span>;<span class="comment">//将数组的长度减少到5，索引等于或超过5的元素被丢弃</span></div><div class="line">alert(arr[<span class="number">8</span>]);<span class="comment">//显示第9个元素已经变为"undefined"</span></div><div class="line">arr.length=<span class="number">10</span>;<span class="comment">//将数组长度恢复为10</span></div><div class="line">alert(arr[<span class="number">8</span>]);<span class="comment">//虽然长度被恢复为10，但第9个元素却无法收回，显示"undefined"</span></div></pre></td></tr></table></figure>
+
+<p>由上面的代码我们可以清楚的看到length属性的性质。但length对象不仅可以显式的设置，它也有可能被隐式修改。JavaScript中可以使用一个未声明过的变量，同样，也可以使用一个未定义的数组元素（指索引超过或等于length的元素），这时，length属性的值将被设置为所使用元素索引的值加1。例如下面的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vararr=[<span class="number">12</span>,<span class="number">23</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">25</span>,<span class="number">98</span>,<span class="number">76</span>,<span class="number">54</span>,<span class="number">56</span>,<span class="number">76</span>];</div><div class="line">alert(arr.length);</div><div class="line">arr[<span class="number">15</span>]=<span class="number">34</span>;</div><div class="line">alert(arr.length);</div></pre></td></tr></table></figure>
+
+<p>代码中同样是先定义了一个包含10个数字的数组，通过alert语句可以看出其长度为10。随后使用了索引为15的元素，将其赋值为15，即arr[15]=34，这时再用alert语句输出数组的长度，得到的是16。无论如何，对于习惯于强类型编程的开发人员来说，这是一个很令人惊讶的特性。事实上，使用newArray()形式创建的数组，其初始长度就是为0，正是对其中未定义元素的操作，才使数组的长度发生变化。</p>
+<p>由上面的介绍可以看到，length属性是如此的神奇，利用它可以方便的增加或者减少数组的容量。因此对length属性的深入了解，有助于在开发过程中灵活运用。</p>
+<h4 id="2-prototype属性">2.prototype属性</h4>
+<p>返回对象类型原型的引用。prototype属性是 object 共有的。objectName.prototype，objectName参数是object对象的名称。说明：用prototype 属性提供对象的类的一组基本功能。 对象的新实例“继承”赋予该对象原型的操作。</p>
+<p>给数组对象添加返回数组中最大元素值的方法。要完成这一点，声明一个函数，将它加入Array.prototype， 并使用它。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">functionarray_max( ){</div><div class="line">   <span class="keyword">var</span> i, max = <span class="keyword">this</span>[<span class="number">0</span>];</div><div class="line">   <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; <span class="keyword">this</span>.length; i++){</div><div class="line">   <span class="keyword">if</span> (max &lt; <span class="keyword">this</span>[i])</div><div class="line">   max = <span class="keyword">this</span>[i];</div><div class="line">   }</div><div class="line">   <span class="keyword">return</span> max;</div><div class="line">}</div><div class="line"> </div><div class="line"><span class="built_in">Array</span>.prototype.max= array_max;</div><div class="line">varx = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>);</div><div class="line">vary = x.max( );</div></pre></td></tr></table></figure>
+
+<h4 id="3-constructor属性">3.constructor属性</h4>
+<p>表示创建对象的函数。<br>object.constructor;//object是对象或函数的名称。<br>说明：constructor属性是所有具有 prototype 的对象的成员。它们包括除 Global 和 Math 对象以外的所有 JScript 固有对象。constructor属性保存了对构造特定对象实例的函数的引用。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">x =<span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"Hi"</span>);</div><div class="line"><span class="keyword">if</span>(x.constructor == <span class="built_in">String</span>) <span class="comment">// 进行处理（条件为真）。</span></div></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">functionMyFunc {</div><div class="line"><span class="comment">//函数体</span></div><div class="line">}</div><div class="line"> </div><div class="line">y =<span class="keyword">new</span> MyFunc;</div><div class="line"><span class="keyword">if</span>(y.constructor == MyFunc) <span class="comment">// 进行处理（条件为真）</span></div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Javascript/">Javascript</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2013/06/23/Javascript-Array/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jsonp跨域访问 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="在介绍jsonp之前，需要先了解一下同源策略。同源指的是主机、端口和协议都相同。同源策略阻止从一个源加载的文档或脚本获取或设置另一个源加载的文档的属性。下面是一个简单示例：
+1234567891011121314151617$(function() {    $.ajax({        url: &#39;http://weather.yahooapis.com/forecastrss&#39;,        type: &#39;GET&#39;,        dataType: &#39;xml&#39;,        data: {            w: &#39;2151849&#39;,            u: &#39;c&#39;        },        success: function() {            console.log(&#39;success&#39;);        },        error: function() {            console.log(&#39;fail&#39;);        }    });});
+
+这里是向Yahoo天气发送一个ajax请求来获取上海的天气数据，由于同源策略，会提示如下错误：
+
+XMLHttpRequest cannot load http://weather.yahooapis.com/forecastrss?w=2151849&amp;amp;u=c. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘null’ is therefore not allowed access.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="jsonp跨域访问"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-05-20T06:03:32.000Z"><a href="/2014/05/20/jsonp-cross-domain/">May 20 2014</a></time>
+      
+      
+  
+    <h1 class="title">jsonp跨域访问</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在介绍jsonp之前，需要先了解一下<a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy" target="_blank" rel="external">同源策略</a>。同源指的是主机、端口和协议都相同。同源策略阻止从一个源加载的文档或脚本获取或设置另一个源加载的文档的属性。下面是一个简单示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    $.ajax({</div><div class="line">        url: <span class="string">'http://weather.yahooapis.com/forecastrss'</span>,</div><div class="line">        type: <span class="string">'GET'</span>,</div><div class="line">        dataType: <span class="string">'xml'</span>,</div><div class="line">        data: {</div><div class="line">            w: <span class="string">'2151849'</span>,</div><div class="line">            u: <span class="string">'c'</span></div><div class="line">        },</div><div class="line">        success: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'success'</span>);</div><div class="line">        },</div><div class="line">        error: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'fail'</span>);</div><div class="line">        }</div><div class="line">    });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>这里是向Yahoo天气发送一个ajax请求来获取上海的天气数据，由于同源策略，会提示如下错误：</p>
+<blockquote>
+<p>XMLHttpRequest cannot load <a href="http://weather.yahooapis.com/forecastrss?w=2151849&amp;u=c" target="_blank" rel="external">http://weather.yahooapis.com/forecastrss?w=2151849&amp;u=c</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘null’ is therefore not allowed access.</p>
+</blockquote>
+<p><a id="more"></a><br>而jsonp就是用来解决跨域调用的问题的。首先我们会发现，诸如script、img等标签，当其src属性值与当前域不同源时，依然可以正常使用，也就是说，它们是可以跨域的。但是假如server端将数据封装到js格式的文件中，供client调用，那么我们就可以在client端获取到server端的数据了。由于json文件被js天然支持，并且是一种轻量级的数据格式，很适合在这种情况下使用。所以一般的思路就是服务器端动态生成json文件供客户端调用，于是逐渐形成了jsonp协议，该协议要求客户端向服务器端传第一个callback参数，服务器端会将json格式的数据作为该参数表示的函数的参数，从而返回一段js代码，再由客户端执行这段代码，从而获取到服务器端的数据。</p>
+<p>jQuery对jsonp实现了很好的封装，下面是一个简单示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> baseURL = <span class="string">'http://lab.syaningv.com/seather/'</span>;</div><div class="line">$.ajax({</div><div class="line">        type : <span class="string">'GET'</span>,</div><div class="line">        url : baseURL + <span class="string">'forecast.jsp'</span>,</div><div class="line">        data : {</div><div class="line">            cityID : param.cityID</div><div class="line">        },</div><div class="line">        dataType : <span class="string">'jsonp'</span>,</div><div class="line">        jsonp : <span class="string">'callback'</span>,</div><div class="line">        jsonpCallback : <span class="string">'forecastHandler'</span>,</div><div class="line">        success : <span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>{</div><div class="line">            showForecast(data, param);</div><div class="line">        }</div><div class="line">    });</div></pre></td></tr></table></figure>
+
+<p>服务器端代码为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>{</div><div class="line">    <span class="built_in">String</span> callback = request.getParameter(<span class="string">"callback"</span>);</div><div class="line">    <span class="built_in">String</span> cityID = request.getParameter(<span class="string">"cityID"</span>);</div><div class="line">    <span class="built_in">String</span> str = <span class="keyword">new</span> YahooForecastor(cityID).forecast();</div><div class="line">    response.getWriter().print(callback + <span class="string">"("</span> + str + <span class="string">")"</span>);</div><div class="line">    response.getWriter().close();</div><div class="line">}<span class="keyword">catch</span>(Exception e){</div><div class="line">    response.sendRedirect(<span class="string">"index.html"</span>);</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>这里实现了一个基于Yahoo天气的js插件，服务器端使用jsp，获取到天气xml数据并进行解析，将需要的数据通过 new YahooForecastor(cityID).forecast() 封装成json格式，然后返回动态生成的js代码。这里并没有看到forecastHandler的函数定义，是因为jQuery会负责生成该函数，即success所绑定的函数。</p>
+<h3 id="参考文章">参考文章</h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy" target="_blank" rel="external">JavaScript 的同源策略</a><br><a href="http://www.cnblogs.com/dowinning/archive/2012/04/19/json-jsonp-jquery.html" target="_blank" rel="external">说说JSON和JSONP，也许你会豁然开朗，含jQuery用例</a><br><a href="http://www.cnblogs.com/yuzhongwusan/archive/2012/12/11/2812849.html" target="_blank" rel="external">jsonp详解</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Javascript/">Javascript</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2014/05/20/jsonp-cross-domain/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

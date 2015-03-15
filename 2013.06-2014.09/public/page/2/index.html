@@ -1,0 +1,575 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 2 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-05-20T06:03:32.000Z"><a href="/2014/05/20/jsonp-cross-domain/">May 20 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/05/20/jsonp-cross-domain/">jsonp跨域访问</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在介绍jsonp之前，需要先了解一下<a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy" target="_blank" rel="external">同源策略</a>。同源指的是主机、端口和协议都相同。同源策略阻止从一个源加载的文档或脚本获取或设置另一个源加载的文档的属性。下面是一个简单示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    $.ajax({</div><div class="line">        url: <span class="string">'http://weather.yahooapis.com/forecastrss'</span>,</div><div class="line">        type: <span class="string">'GET'</span>,</div><div class="line">        dataType: <span class="string">'xml'</span>,</div><div class="line">        data: {</div><div class="line">            w: <span class="string">'2151849'</span>,</div><div class="line">            u: <span class="string">'c'</span></div><div class="line">        },</div><div class="line">        success: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'success'</span>);</div><div class="line">        },</div><div class="line">        error: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'fail'</span>);</div><div class="line">        }</div><div class="line">    });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>这里是向Yahoo天气发送一个ajax请求来获取上海的天气数据，由于同源策略，会提示如下错误：</p>
+<blockquote>
+<p>XMLHttpRequest cannot load <a href="http://weather.yahooapis.com/forecastrss?w=2151849&amp;u=c" target="_blank" rel="external">http://weather.yahooapis.com/forecastrss?w=2151849&amp;u=c</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘null’ is therefore not allowed access.</p>
+</blockquote>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/05/20/jsonp-cross-domain/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-30T07:28:56.000Z"><a href="/2014/04/30/Python-picture-crawler/">Apr 30 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/30/Python-picture-crawler/">Python抓取图片</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>抓的是豆瓣妹子的图片。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> threading</div><div class="line"><span class="keyword">import</span> urllib.request</div><div class="line"><span class="keyword">import</span> re, os</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">dbmeiziCrawler</span><span class="params">(threading.Thread)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, startpage, endpage, imgdir)</span>:</span></div><div class="line">        threading.Thread.__init__(self, name=name)</div><div class="line">        self.startpage = startpage</div><div class="line">        self.endpage = endpage</div><div class="line">        self.imgdir = imgdir</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">for</span> page <span class="keyword">in</span> range(self.startpage, self.endpage + <span class="number">1</span>):</div><div class="line">            pageurl = <span class="string">'http://dbmeizi.com/?p='</span> + str(page)</div><div class="line">            pagehtml = urllib.request.urlopen(pageurl).read().decode(<span class="string">'utf-8'</span>)</div><div class="line">            reg = <span class="string">'http://pic.dbmeizi.com/pics/\d+/p\d+\.jpg'</span></div><div class="line">            imgurllist = re.findall(reg, pagehtml)</div><div class="line">         </div><div class="line">            <span class="keyword">for</span> imgurl <span class="keyword">in</span> imgurllist:</div><div class="line">                imgname = imgurl[imgurl.rfind(<span class="string">'/'</span>) + <span class="number">1</span>:]</div><div class="line">                urllib.request.urlretrieve(imgurl, self.imgdir + imgname)</div><div class="line">                print(self.name + <span class="string">'\t'</span> + imgurl)</div><div class="line"> </div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    maxpage = <span class="number">300</span></div><div class="line">    pages_each_thread = <span class="number">20</span></div><div class="line">    tasknums = maxpage // pages_each_thread + (<span class="number">0</span> <span class="keyword">if</span> maxpage % pages_each_thread == <span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span>)</div><div class="line">     </div><div class="line">    imgdir = os.getcwd() + <span class="string">'/dbmeizi/'</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(imgdir):</div><div class="line">        os.mkdir(imgdir)</div><div class="line"> </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, tasknums + <span class="number">1</span>):</div><div class="line">        dbmeiziCrawler(<span class="string">'task'</span> + str(i), (i - <span class="number">1</span>) * pages_each_thread, i * pages_each_thread - <span class="number">1</span>, imgdir).start()</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-16T08:55:58.000Z"><a href="/2014/04/16/Java-XML/">Apr 16 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/16/Java-XML/">Java解析XML</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>应用程序经常会与xml文档进行交互，因此需要对xml文档进行解析，因此需要用到解析器。解析器是用来分析xml文档，并对信息做一些特定处理的应用程序，通常我们使用已有的解析器而不必自行编写解析器。至于DOM和SAX，则是解析器常用的两种解析API。</p>
+<p>DOM 是用与平台和语言无关的方式表示 XML 文档的官方 W3C 标准。DOM 是以层次结构组织的节点或信息片断的集合。这个层次结构允许开发人员在树中寻找特定信息。分析该结构通常需要加载整个文档和构造层次结构，然后才能做任何工作。由于它是基于信息层次的，因而DOM被认为是基于树或基于对象的。而SAX是一个事件驱动的API。SAX分析经过其的XML流，并产生相应的事件。SAX API 允许开发者捕获这些事件，并对它们进行操作。应用程序通过注册自身，以接受XML解析器遇到文档不同部分而发出的信息。</p>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/04/16/Java-XML/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-13T17:46:38.000Z"><a href="/2014/04/14/difference-between-get-and-post/">Apr 14 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/14/difference-between-get-and-post/">GET和POST的区别</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="1-_生成方式不同">1. 生成方式不同</h3>
+<p>GET的主要生成方式有：在地址栏输入URL；超链接；表单中的method属性为get或者为空。而POST的主要生成方式为表单中的method属性为post。当然了，GET和POST都可以通过Ajax来发送。</p>
+<h3 id="2-_数据传输方式不同">2. 数据传输方式不同</h3>
+<p>GET的参数会附在URL地址后面，所以GET方式提交时HTTP没有消息体。而POST方式参数会在HTTP的消息体中以实体的方式发送到服务器。另外GET方式提交表单时数据会自动进行编码处理，而POST方式则不会。</p>
+<h3 id="3-_传输的数据量">3. 传输的数据量</h3>
+<p>GET一般发送的数据量较小，数据有长度限制，当然这些限制一般是客户端和服务器来进行限制的，不是协议的限制。而POST适合大规模的数据传送，理论上没有数据大小限制。<br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/04/14/difference-between-get-and-post/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-12T07:32:22.000Z"><a href="/2014/04/12/Python-underline/">Apr 12 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/12/Python-underline/">Python中的下划线</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在python编程中，经常会遇到以下划线开头的属性或方法，常见的有以下四种情况：</p>
+<ul>
+<li>xxx，不以下划线开头，表示public</li>
+<li>_xxx，以单个下划线开头，表示private，只有类对象可访问，子类对象不可访问，不可以通过from module import *导入</li>
+<li>__xxx，以双下划线开头，类似于protected，类对象及子类对象可访问</li>
+<li><strong>xxx</strong>，以双下划线开头和结尾，是系统定义的一些特殊名称</li>
+</ul>
+<p>看下面的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">public_method</span><span class="params">(self)</span>:</span></div><div class="line">        print(<span class="string">'public method'</span>)</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__private_methon</span><span class="params">(self)</span>:</span></div><div class="line">        print(<span class="string">'private method'</span>)</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_protected_method</span><span class="params">(self)</span>:</span></div><div class="line">        print(<span class="string">'proteted method'</span>)</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SubTest</span><span class="params">(Test)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"> </div><div class="line">test = Test()</div><div class="line">test.public_method()</div><div class="line">test._protected_method()</div><div class="line"> </div><div class="line">subTest = SubTest()</div><div class="line">subTest._protected_method()</div></pre></td></tr></table></figure>
+
+<p>如果调用 <code>test.__private_method()</code> 则会报错。<br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/04/12/Python-underline/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-08T07:54:08.000Z"><a href="/2014/04/08/css-div-position/">Apr 8 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/08/css-div-position/">css+div定位分析</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>css+div设计中，position属性可以取值：static、fixed、relative和absolute，它们的区别如下：</p>
+<ol>
+<li>static: 默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 z-index 声明）</li>
+<li>fixed: 生成绝对定位的元素，相对于浏览器窗口进行定位。元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。可通过z-index进行层次分级。</li>
+<li>relative: 生成相对定位的元素，通过top,bottom,left,right的设置相对于其正常位置进行定位。可通过z-index进行层次分级。</li>
+<li>absolute: 生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。可通过z-index进行层次分级。</li>
+</ol>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/04/08/css-div-position/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-03T07:07:36.000Z"><a href="/2014/04/03/Django-view-and-URL-config/">Apr 3 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/03/Django-view-and-URL-config/">Django视图和URL配置</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="1-_简单视图和URL配置">1. 简单视图和URL配置</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(request)</span>:</span></div><div class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">'Hello world'</span>)</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^hello/$'</span>, hello),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<p>这里注意网站根目录可以使用^$（表示一个空字符串）进行配置，如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">'^$'</span>, my_homepage_view),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/04/03/Django-view-and-URL-config/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-01T02:51:22.000Z"><a href="/2014/04/01/HTTP-protocol/">Apr 1 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/01/HTTP-protocol/">HTTP 协议</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="一、HTTP请求">一、HTTP请求</h2>
+<h3 id="1-_请求行">1. 请求行</h3>
+<p>格式：Method Request-URI HTTP-Version CRLF<br>Method为请求方法，Request-URI为请求地址，HTTP-Version为HTTP协议版本，常用为HTTP/1.1，CRLF表示回车换行。请求方法如下：<br><strong>GET：</strong>请求获取Request-URI所标识的资源<br><strong>POST：</strong>在Request-URI所标识的资源后附加新的数据<br><strong>HEAD：</strong>请求获取由Request-URI所标识的资源的响应消息报头<br><strong>PUT：</strong>请求服务器存储一个资源，并用Request-URI作为其标识<br><strong>DELETE：</strong>请求服务器删除Request-URI所标识的资源<br><strong>TRACE：</strong>请求服务器回送收到的请求信息，主要用于测试或诊断<br><strong>CONNECT：</strong>保留将来使用<br><strong>OPTIONS：</strong>请求查询服务器的性能，或者查询与资源相关的选项和需求</p>
+<h2 id="二、HTTP响应">二、HTTP响应</h2>
+<p>HTTP响应也是由三个部分组成，分别为：状态行、消息报头、响应正文。</p>
+<h3 id="1-_状态行">1. 状态行</h3>
+<p>格式：HTTP-Version Status-Code Reason-Phrase CRLF<br>HTTP-Version表示服务器HTTP协议的版本，通常为HTTP/1.1，Status-Code表示服务器发回的响应状态代码，Reason-Phrase表示状态代码的文本描述。状态代码有三位数字组成，第一个数字定义了响应的类别，且有五种可能取值：<br><strong>1xx：</strong>指示信息–表示请求已接收，继续处理<br><strong>2xx：</strong>成功–表示请求已被成功接收、理解、接受<br><strong>3xx：</strong>重定向–要完成请求必须进行更进一步的操作<br><strong>4xx：</strong>客户端错误–请求有语法错误或请求无法实现<br><strong>5xx：</strong>服务器端错误–服务器未能实现合法的请求<br>具体的状态码、状态描述及说明参考<a href="http://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81" target="_blank" rel="external">wiki</a><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/04/01/HTTP-protocol/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-18T08:51:31.000Z"><a href="/2014/03/18/Java-thread-3/">Mar 18 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/18/Java-thread-3/">Java多线程(三)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="七、线程池">七、线程池</h3>
+<p>在面向对象编程中，创建和销毁对象是很费时间的，因为创建一个对象要获取内存资源或者其它更多资源。在Java中更是如此，虚拟机将试图跟踪每一个对象，以便能够在对象销毁后进行垃圾回收。所以提高服务程序效率的一个手段就是尽可能减少创建和销毁对象的次数，特别是一些很耗资源的对象创建和销毁。如何利用已有对象来服务就是一个需要解决的关键问题，其实这就是一些”池化资源”技术产生的原因。比如线程池、数据库连接池正是遵循这一思想而产生的。</p>
+<p>线程池的作用就是限制系统中执行线程的数量。根据系统的环境情况，可以自动或手动设置线程数量，达到运行的最佳效果；少了浪费了系统资源，多了造成系统拥挤效率不高。用线程池控制线程数量，其他线程排队等候。一个任务执行完毕，再从队列中取最前面的任务开始执行。若队列中没有等待任务，线程池的这一资源处于等待。当一个新任务需要运行时，如果线程池中有等待的工作线程，就可以开始运行了；否则进入等待队列。</p>
+<p>使用线程池，减少了创建和销毁线程的次数，每个工作线程都可以被重复利用，可执行多个任务。可以根据系统的承受能力，调整线程池中工作线线程的数目，防止因为消耗过多的内存而导致服务器负荷过重。</p>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/18/Java-thread-3/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-18T08:47:19.000Z"><a href="/2014/03/18/Java-thread-2/">Mar 18 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/18/Java-thread-2/">Java多线程(二)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="五、线程同步">五、线程同步</h3>
+<p>Java中的线程同步主要有两种方法：synchronized关键字和synchronized语句块。</p>
+<h4 id="1-synchronized关键字">1.synchronized关键字</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">execute</span>();</div></pre></td></tr></table></figure>
+
+<p>可以使用synchronized关键字来修饰一个方法，此时该方法叫做同步方法。synchronized其实就是一种加锁机制。对于实例方法，要给调用该方法的对象加锁；对于静态方法，给该类加锁。如果一个线程通过一个对象来调用同步的实例（或者动态）方法，首先会给该对象（或该类）加锁，然后执行方法，然后解锁。在解锁之前，另一个调用该对象（或该类）中方法的线程都将被阻塞，直到解锁。当同步方法执行完或者产生异常时，会自动释放锁。</p>
+<h4 id="2-synchronized语句块">2.synchronized语句块</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">synchronized</span>(object){</div><div class="line">    <span class="comment">// do something</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>synchronized不仅可以给调用方法的对象或者类加锁，还可以给任何对象加锁。同步语句允许设置方法中的部分代码同步，而不必要求整个方法同步，增强了程序的并发能力。因此，synchronized方法是一种粗粒度的并发控制，某一时刻，只能有一个线程执行该synchronized方法；而synchronized块则是一种细粒度的并发控制，只会将块中的代码同步，位于方法内、synchronized块之外的其他代码是可以被多个线程同时访问到的。<br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/18/Java-thread-2/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/" class="alignleft prev">Prev</a>
+  
+  
+    <a href="/page/3/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

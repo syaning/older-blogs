@@ -1,0 +1,583 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 4 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-14T08:03:26.000Z"><a href="/2014/03/14/Java-design-pattern-multiton/">Mar 14 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/14/Java-design-pattern-multiton/">Java模式之多例模式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>多例模式实际上就是单例模式的推广，多例模式又划分为有上限多例模式和无上限多例模式两种，有上限多例模式中的多例类的实例是有上限的，当这个多例类中的上限数值上等于1时，此时，多例类退化回到了单例类；而对于无上限多例模式中的多例类，它的上限是没有限制的，也就是说它的上限数值是不确定的，在此我们近讨论有上限的多例模式。一个非常典型的例子就是一副麻将里只有两枚骰子。总的来说，多例模式有以下特点：</p>
+<ol>
+<li>多例类可以有多个实例；</li>
+<li>多例类必须自己创建自己的实例，并管理自己的实例，向外界提供自己的实例。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/14/Java-design-pattern-multiton/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-14T03:12:55.000Z"><a href="/2014/03/14/Java-design-pattern-singleton/">Mar 14 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/14/Java-design-pattern-singleton/">Java模式之单例模式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Java单例模式是一种常见的设计模式，该模式有以下三个特点：</p>
+<ol>
+<li>单例类只能有一个实例；</li>
+<li>单例类必须自己自己创建自己的唯一实例；</li>
+<li>单例类必须给所有其他对象提供这一实例。</li>
+</ol>
+<p>常用的单例模式设计有三种：懒汉式单例、饿汉式单例、登记式单例。</p>
+<h3 id="1-_懒汉式单例">1. 懒汉式单例</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>{</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {</div><div class="line"> </div><div class="line">    }</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>)</div><div class="line">            singleton = <span class="keyword">new</span> Singleton();</div><div class="line">        <span class="keyword">return</span> singleton;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/14/Java-design-pattern-singleton/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-01T04:22:04.000Z"><a href="/2014/03/01/HTML5-ApplicationCache/">Mar 1 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/01/HTML5-ApplicationCache/">HTML5之ApplicationCache</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>HTML5 作为新一代的 HTML 标准，引入了应用程序缓存，增加了对离线功能的支持。这意味着web应用可进行缓存，并可在没有因特网连接时进行访问。ApplicationCache是一种简单的机制，它允许开发人员可以指定哪些文件应该被缓存给浏览器，并提供给离线用户。</p>
+<p>在开发支持离线的 Web 应用程序时，开发者通常需要使用以下三个方面的功能：</p>
+<ol>
+<li>离线资源缓存：需要一种方式来指明应用程序离线工作时所需的资源文件。这样，浏览器才能在在线状态时，把这些文件缓存到本地。此后，当用户离线访问应用程序时，这些资源文件会自动加载，从而让用户正常使用。HTML5 中，通过<br>cache manifest 文件指明需要缓存的资源，并支持自动和手动两种缓存更新方式。</li>
+<li>在线状态检测：开发者需要知道浏览器是否在线，这样才能够针对在线或离线的状态，做出对应的处理。在 HTML5 中，提供了两种检测当前网络是否在线的方式。</li>
+<li>本地数据存储：离线时，需要能够把数据存储到本地，以便在线时同步到服务器上。为了满足不同的存储需求，HTML5 提供了 DOM Storage 和 Web SQL Database 两种存储机制。前者提供了易用的 key/value 对存储方式，而后者提供了基本的关系数据库存储功能。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/01/HTML5-ApplicationCache/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-02-28T04:14:57.000Z"><a href="/2014/02/28/HTML5-Web-SQL-Database/">Feb 28 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/02/28/HTML5-Web-SQL-Database/">HTML5之Web SQL Database</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>对于Web应用的存储，使用最多的莫过于Cookie了。Cookie用于弥补HTTP协议的无状态性，服务器可以使用Cookie中包含的信息来判断HTTP传输中的状态。但Cookie有自己固有的缺点：它的大小受限，大多数浏览器对Cookie大小限制为4K；Cookie机制可以在浏览器中被禁用；Cookie需要在客户端和服务器端来回地传送，繁琐且消耗带宽；存在安全风险，Cookie是以明文存放，可能被恶意客户修改，当然可以手动加密和解密Cookie，但这需要额外的编码，并且因为加密和解密需要消耗一定的时间而影响应用程序的性能。</p>
+<p>对于HTML5，也许很有用的就是它新推出的“Web Storage”（Web 存储）API，它包括localStorage和sessionStorage，对简单的键值对（比如应用程序设置）或简单对象（如应用程序状态）进行存储，使用本地和会话存储能够很好地完成，对于存储少量的数据非常有用，但是对大量的结构化数据进行处理时，它就力所不及了，而这正是HTML5的 “Web SQL Database” API的应用所在。我们将着重讨论三个方法：</p>
+<ul>
+<li>openDatabase()：这个方法使用现有数据库或创建新数据库创建数据库对象</li>
+<li>transaction()：这个方法允许我们根据情况控制事务提交或回滚</li>
+<li>executeSql()：这个方法用于执行真实的SQL查询<br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/02/28/HTML5-Web-SQL-Database/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-02-28T04:10:25.000Z"><a href="/2014/02/28/HTML5-Notification/">Feb 28 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/02/28/HTML5-Notification/">HTML5之Notification</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>HTML5中的桌面提醒（Web Notifications）能够让用户得到实时的消息提醒，在网页多窗口聊天的时候，这一功能将极大的方便用户。之前浏览器是一个严格的沙盒工作模式，这种模式把浏览器和桌面的通信隔离开，但是Notification的出现，可以跨越沙盒通过桌面向用户发出浏览器的通知。先来看示例代码与效果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span> /&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="title">title</span>&gt;</span>Desktop Notification<span class="tag">&lt;/<span class="title">title</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"show notification"</span> <span class="attribute">onClick</span>=<span class="value">"showPermission();"</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showPermission</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">if</span> (!(<span class="string">"Notification"</span> <span class="keyword">in</span> <span class="built_in">window</span>)) {</div><div class="line">        alert(<span class="string">"This browser does not support desktop notification"</span>);</div><div class="line">      } <span class="keyword">else</span> {</div><div class="line">        Notification.requestPermission(<span class="function"><span class="keyword">function</span><span class="params">(permission)</span> </span>{</div><div class="line">          <span class="comment">// This allows to use Notification.permission with Chrome/Safari</span></div><div class="line">          <span class="keyword">if</span> (Notification.permission !== permission) {</div><div class="line">            Notification.permission = permission;</div><div class="line">          }</div><div class="line"> </div><div class="line">          <span class="keyword">if</span> (permission === <span class="string">"granted"</span>) {</div><div class="line">            <span class="keyword">var</span> notification = <span class="keyword">new</span> Notification(<span class="string">"notification title"</span>, {</div><div class="line">              dir: <span class="string">"auto"</span>,</div><div class="line">              lang: <span class="string">"hi"</span>,</div><div class="line">              tag: <span class="string">"testTag"</span>,</div><div class="line">              icon: <span class="string">"http://www.html5party.com/bbs/static/image/common/logo.png"</span>,</div><div class="line">              body: <span class="string">"notification body"</span></div><div class="line">            });</div><div class="line">          } <span class="keyword">else</span> {</div><div class="line">            alert(<span class="string">"notification failed."</span>);</div><div class="line">          }</div><div class="line">        })</div><div class="line">      }</div><div class="line">    }  </div><div class="line">  <span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/02/28/HTML5-Notification/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-02-26T03:41:30.000Z"><a href="/2014/02/26/HTML5-Geolocation/">Feb 26 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/02/26/HTML5-Geolocation/">HTML5之Geolocation</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>HTML5提供了Geolocation API，用来确定和分享地理位置，API返回经度和纬度坐标——这是企业可用来在这一坐标附近的区域提供服务的信息，这类服务通常被称作基于位置的服务(location-based service, LBS)。事实上，对于用户地理位置的探测在互联网上早已经有了很多案例，其中一个最常见的应用就是当在地址栏输入google.com并按下回车键的时候，google并没有把我们带向刚才输入的地址，而是转向了google在我们所处地区的页面，比如大陆和香港用户会到达google.com.hk.</p>
+<p>Geolocation API基于navigator这一全局对象的一个新属性：navigator.geolocation，navigator对象提供了一些关于访问者的浏览器和系统的有用信息。Geolocation可以确定使用了IP地址、基于web的数据库、无线网络连接，以及三角定位或是GPS技术的访问者的经度和纬度。应该要注意的一点是，由Geolocation提供的信息的准确性会基于获取信息的手段而发生变化。偶然情况下，在一些位置上，你有可能不能获得明确的地理位置读数或是一点数据都接收不到。脚本可使用navigator.geolocation对象来确定与用户的宿主设备相关的位置信息，在检索到位置信息之后，一个位置对象就会被创建出来，并使用这些数据做填充。navigator.geolocation对象有三个方法：</p>
+<ul>
+<li>getCurrentPosition()</li>
+<li>watchPosition()</li>
+<li>clearWatch()<br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/02/26/HTML5-Geolocation/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-29T06:10:13.000Z"><a href="/2013/06/29/Javascript-buildin-objects/">Jun 29 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/29/Javascript-buildin-objects/">javascript内建对象</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、Object类型">一、Object类型</h3>
+<p>JavaScript中所有对象都继承自Object类型，对象字面量属于Object类型。Object类型拥有一些基本的属性和方法：</p>
+<ol>
+<li>constructor属性：指向初始化对象的构造函数；</li>
+<li>toString方法：对象向字符串转换时调用的方法；</li>
+<li>valueOf方法：对象向基本数据类型转换时调用的方法，未必转换为数字；</li>
+<li>hasOwnProperty方法和isProprotypeOf方法。</li>
+</ol>
+<h3 id="二、基本包装类型Boolean、Number和String">二、基本包装类型Boolean、Number和String</h3>
+<ol>
+<li>可以通过new运算符生成包装类型的实例；</li>
+<li>typeof运算结果为object；</li>
+<li>有相应的属性和方法可以调用；</li>
+<li>一般不建议使用Boolean和Number实例；</li>
+<li>系统会隐含地进行String基本类型和包装类型的转换，所以总体而言一般没有必要特别注意基本类型和包装类型。</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/29/Javascript-buildin-objects/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-27T06:15:53.000Z"><a href="/2013/06/27/Javascript-Object-operations/">Jun 27 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/27/Javascript-Object-operations/">Javascript对象和属性操作</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、判断对象属于哪个基本类型：typeof运算符">一、判断对象属于哪个基本类型：typeof运算符</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span> x <span class="keyword">is</span> undefined</div><div class="line"><span class="keyword">typeof</span> <span class="keyword">true</span> <span class="keyword">is</span> boolean</div><div class="line"><span class="keyword">typeof</span> <span class="string">'Jerry'</span> <span class="keyword">is</span> <span class="keyword">string</span></div><div class="line"><span class="keyword">typeof</span> <span class="number">2</span> <span class="keyword">is</span> number</div><div class="line"><span class="keyword">typeof</span> instance <span class="keyword">is</span> <span class="keyword">object</span></div><div class="line"><span class="keyword">typeof</span> <span class="keyword">null</span> <span class="keyword">is</span> <span class="keyword">object</span></div><div class="line"><span class="keyword">typeof</span> SuperType <span class="keyword">is</span> function</div></pre></td></tr></table></figure>
+
+<h3 id="二、判断对象是否是某个类型的实例：instanceof运算符">二、判断对象是否是某个类型的实例：instanceof运算符</h3>
+<p>某个实例是其继承原型链上所有原型类型的实例，注意如果是借用构造函数的继承，那么子类的实例不是父类的实例，因为在这种情况下，仅仅是在子类实例中声明了父类的属性，因此事实上没有产生继承关系。</p>
+<h3 id="三、判断对象是否是某个实例的原型：isPrototypeOf()函数">三、判断对象是否是某个实例的原型：isPrototypeOf()函数</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = {};</div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf(o); <span class="comment">// true</span></div><div class="line"><span class="built_in">Object</span>.isPrototypeOf(o); <span class="comment">// false</span></div><div class="line">o.isPrototypeOf(<span class="built_in">Object</span>); <span class="comment">// false</span></div><div class="line">Fucntion.prototype.isPrototypeOf(<span class="built_in">Object</span>); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/27/Javascript-Object-operations/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-26T07:49:33.000Z"><a href="/2013/06/26/CSS-selector/">Jun 26 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/26/CSS-selector/">CSS选择器</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="/2013/06/26/CSS-selector/css-selector.png" alt=""></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-26T06:21:42.000Z"><a href="/2013/06/26/Javascript-inherit/">Jun 26 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/26/Javascript-inherit/">Javascript继承机制</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、原型链继承">一、原型链继承</h3>
+<p>本质是将子类的原型设为父类的实例，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">this</span>.property = <span class="literal">true</span>;</div><div class="line">}</div><div class="line"> </div><div class="line">SuperType.prototype.getSuperValue = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.property;</div><div class="line">};</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">this</span>.subproperty = <span class="literal">false</span>;</div><div class="line">}</div><div class="line"> </div><div class="line">SubType.prototype = <span class="keyword">new</span> SuperType();</div><div class="line">SubType.prototype.getSubValue = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.subproperty;</div><div class="line">};</div><div class="line"> </div><div class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> SubType();</div></pre></td></tr></table></figure>
+
+<p>对象关系图如下：<br><img src="/2013/06/26/Javascript-inherit/20130623120754609.jpg" alt=""></p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>JavaScript中所有对象都继承自Object对象类型；</li>
+<li>为子类添加子类特有方法要在原型替换语句后，即要先声明子类的原型为父类的实例，然后为子类添加其特有的方法；</li>
+<li>可以在子类原型中覆盖父类方法，因为子类原型本来就是父类原型的实例，参考实例和原型关系即可理解；</li>
+<li>某种意义上前面讲的实例和原型就是一次继承关系，而这里的父类和子类是多次继承关系。</li>
+</ol>
+<p><strong>存在的问题：</strong></p>
+<ol>
+<li>父类中的实例属性会成为子类的原型属性；</li>
+<li>无法在不影响所有子类实例情况下向父类构造函数传参。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/26/Javascript-inherit/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/3/" class="alignleft prev">Prev</a>
+  
+  
+    <a href="/page/5/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

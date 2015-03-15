@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTML5之Notification | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="HTML5中的桌面提醒（Web Notifications）能够让用户得到实时的消息提醒，在网页多窗口聊天的时候，这一功能将极大的方便用户。之前浏览器是一个严格的沙盒工作模式，这种模式把浏览器和桌面的通信隔离开，但是Notification的出现，可以跨越沙盒通过桌面向用户发出浏览器的通知。先来看示例代码与效果：
+123456789101112131415161718192021222324252627282930313233343536&amp;lt;!DOCTYPE html&amp;gt;  &amp;lt;html&amp;gt;  &amp;lt;head&amp;gt;  &amp;lt;meta charset=&quot;UTF-8&quot; /&amp;gt;  &amp;lt;title&amp;gt;Desktop Notification&amp;lt;/title&amp;gt;  &amp;lt;/head&amp;gt;  &amp;lt;body&amp;gt;    &amp;lt;input type=&quot;button&quot; value=&quot;show notification&quot; onClick=&quot;showPermission();&quot;&amp;gt;    &amp;lt;script&amp;gt;    function showPermission() {      if (!(&quot;Notification&quot; in window)) {        alert(&quot;This browser does not support desktop notification&quot;);      } else {        Notification.requestPermission(function(permission) {          // This allows to use Notification.permission with Chrome/Safari          if (Notification.permission !== permission) {            Notification.permission = permission;          }           if (permission === &quot;granted&quot;) {            var notification = new Notification(&quot;notification title&quot;, {              dir: &quot;auto&quot;,              lang: &quot;hi&quot;,              tag: &quot;testTag&quot;,              icon: &quot;http://www.html5party.com/bbs/static/image/common/logo.png&quot;,              body: &quot;notification body&quot;            });          } else {            alert(&quot;notification failed.&quot;);          }        })      }    }    &amp;lt;/script&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="HTML5之Notification"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-02-28T04:10:25.000Z"><a href="/2014/02/28/HTML5-Notification/">Feb 28 2014</a></time>
+      
+      
+  
+    <h1 class="title">HTML5之Notification</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>HTML5中的桌面提醒（Web Notifications）能够让用户得到实时的消息提醒，在网页多窗口聊天的时候，这一功能将极大的方便用户。之前浏览器是一个严格的沙盒工作模式，这种模式把浏览器和桌面的通信隔离开，但是Notification的出现，可以跨越沙盒通过桌面向用户发出浏览器的通知。先来看示例代码与效果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span> /&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="title">title</span>&gt;</span>Desktop Notification<span class="tag">&lt;/<span class="title">title</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"show notification"</span> <span class="attribute">onClick</span>=<span class="value">"showPermission();"</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showPermission</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">if</span> (!(<span class="string">"Notification"</span> <span class="keyword">in</span> <span class="built_in">window</span>)) {</div><div class="line">        alert(<span class="string">"This browser does not support desktop notification"</span>);</div><div class="line">      } <span class="keyword">else</span> {</div><div class="line">        Notification.requestPermission(<span class="function"><span class="keyword">function</span><span class="params">(permission)</span> </span>{</div><div class="line">          <span class="comment">// This allows to use Notification.permission with Chrome/Safari</span></div><div class="line">          <span class="keyword">if</span> (Notification.permission !== permission) {</div><div class="line">            Notification.permission = permission;</div><div class="line">          }</div><div class="line"> </div><div class="line">          <span class="keyword">if</span> (permission === <span class="string">"granted"</span>) {</div><div class="line">            <span class="keyword">var</span> notification = <span class="keyword">new</span> Notification(<span class="string">"notification title"</span>, {</div><div class="line">              dir: <span class="string">"auto"</span>,</div><div class="line">              lang: <span class="string">"hi"</span>,</div><div class="line">              tag: <span class="string">"testTag"</span>,</div><div class="line">              icon: <span class="string">"http://www.html5party.com/bbs/static/image/common/logo.png"</span>,</div><div class="line">              body: <span class="string">"notification body"</span></div><div class="line">            });</div><div class="line">          } <span class="keyword">else</span> {</div><div class="line">            alert(<span class="string">"notification failed."</span>);</div><div class="line">          }</div><div class="line">        })</div><div class="line">      }</div><div class="line">    }  </div><div class="line">  <span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p><a id="more"></a><br><img src="/2014/02/28/HTML5-Notification/2014-02-28_161103.png" alt=""><br>首先是先检测浏览器是否支持notification，如果支持的话，Notification.requestPermission()用于向用户请求获得消息提醒的权限，返回值为”granted”（同意），”default”（默认，无动作），”denied”（拒绝）。若权限为同意，则构造Notification对象通知用户。至于Notification在这里不再赘述，详情请参阅推荐阅读。</p>
+<h3 id="参考文章">参考文章</h3>
+<p><a href="https://developer.mozilla.org/en-US/docs/WebAPI/Using_Web_Notifications" target="_blank" rel="external">Using Web Notifications</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/API/Notification" target="_blank" rel="external">Notification</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/HTML5/">HTML5</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2014/02/28/HTML5-Notification/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

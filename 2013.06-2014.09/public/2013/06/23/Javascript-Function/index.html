@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Javascript函数 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="一、函数的定义
+
+显式函数，例如：
+
+123function add(a, b) {	return a + b;}
+
+
+使用Function作为对象的构造函数，把参数列表和函数体都作为字符串。可以接受任意多个参数，最后一个为函数体；如果只有一个参数，则为函数体。例如：
+
+1var add = new Function(&quot;a&quot;, &quot;b&quot;, &quot;return a+b;&quot;);
+
+
+匿名构造函数，例如：
+
+123var add = function(a, b) {	return a + b;};
+
+这种情况下可以加上默认参数，例如：
+123var result = (function(a, b) {	return a + b;})(3,4);
+
+而且此时函数可以有另外的名字，例如：
+123var add = function addNum(a, b) {	return a + b;};">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Javascript函数"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-23T06:48:40.000Z"><a href="/2013/06/23/Javascript-Function/">Jun 23 2013</a></time>
+      
+      
+  
+    <h1 class="title">Javascript函数</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、函数的定义">一、函数的定义</h3>
+<ol>
+<li>显式函数，例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(a, b)</span> </span>{</div><div class="line">	<span class="keyword">return</span> a + b;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<ol>
+<li>使用Function作为对象的构造函数，把参数列表和函数体都作为字符串。可以接受任意多个参数，最后一个为函数体；如果只有一个参数，则为函数体。例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> add = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"return a+b;"</span>);</div></pre></td></tr></table></figure>
+
+<ol>
+<li>匿名构造函数，例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> </span>{</div><div class="line">	<span class="keyword">return</span> a + b;</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>这种情况下可以加上默认参数，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> result = (<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> </span>{</div><div class="line">	<span class="keyword">return</span> a + b;</div><div class="line">})(<span class="number">3</span>,<span class="number">4</span>);</div></pre></td></tr></table></figure>
+
+<p>而且此时函数可以有另外的名字，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span> <span class="title">addNum</span><span class="params">(a, b)</span> </span>{</div><div class="line">	<span class="keyword">return</span> a + b;</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p><a id="more"></a></p>
+<h3 id="二、函数特点">二、函数特点</h3>
+<ol>
+<li>因为JavaScript是弱类型的，所以函数定义时不指定参数和返回值类型；</li>
+<li>没有重载定义机制。同名函数即使签名不同，后面的定义也将覆盖掉前面的定义；</li>
+<li>函数可以嵌套定义。例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hypo</span><span class="params">(a, b)</span> </span>{</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">square</span><span class="params">(x)</span> </span>{<span class="keyword">return</span> x * x;}</div><div class="line">	<span class="keyword">return</span> <span class="built_in">Math</span>.sqrt(square(a) + square(b));</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<ol>
+<li>可以把函数名当作普通变量使用。例如：赋予一个变量、作为数组参数、作为对象属性（此时称作方法）、作为函数参数、作为函数返回值等。</li>
+</ol>
+<h3 id="三、Function类型">三、Function类型</h3>
+<p>所有函数都是Function类型的实例，用typeof运算符验证时会返回“function”。使用Function构造函数方式允许代码运行时被编译，类似于eval。它有如下属性及方法：</p>
+<ol>
+<li>prototype属性：预定义的原型对象，一般用于存放所有的实例方法；</li>
+<li>length属性：函数希望接收的参数个数；</li>
+<li>call方法和apply方法：用于在指定对象作用域环境下调用函数，相当于修改了函数中this对象的值。两者区别在于接收参数方式不同：<ul>
+<li>第一个参数都是拟指定的作用域；</li>
+<li>apply第二个参数以数组形式传入所有参数f.apply(o,[n1,n2,……])；</li>
+<li>call以序列形式传入所有参数f.call(o,n1,n2,……)；</li>
+</ul>
+</li>
+<li>arguments对象：<ul>
+<li>包含传入函数所有参数的类数组对象；</li>
+<li>具有length属性，表示参数的个数；</li>
+<li>具有callee属性，指向正在执行的函数：可用于匿名函数调用自身；还具有非标准的caller属性，指向调用当前函数的函数，一般通过arguments.callee.caller来实现调用；</li>
+</ul>
+</li>
+<li>this对象：<ul>
+<li>是关键字，不是变量或者属性名，不能被赋值；</li>
+<li>与执行环境和作用域无关，指向函数的调用对象；</li>
+<li>与Arguments一起作为函数的隐含参数；</li>
+<li>函数调用时this的4种情况：<br>  （1）直接调用f() this=window<br>  （2）方法调用o.f() this=o<br>  （3）call或apply调用f.apply(o,args[]) this=o<br>  （4）构造函数调用 new f() this为新创建对象</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Javascript/">Javascript</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2013/06/23/Javascript-Function/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

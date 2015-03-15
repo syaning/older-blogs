@@ -1,0 +1,282 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java模式之抽象工厂模式 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="上一篇我们使用了工厂方法模式，使系统很好地满足了开闭原则，增强了系统的扩展性，但是我们忽视了一点，就是人类有性别之分，无论什么颜色的人种，都有男女之分。在这里，我们要引出一个产品族的概念，抽象的定义是：位于不同产品等级结构中，功能相关联的产品组成的家族。在我们的例子中，男人就是一个产品族，女人是另外一个产品族。抽象工厂模式的用意为：给客户端提供一个接口，可以创建多个产品族中的产品对象。使用抽象工厂模式要满足以下条件：
+
+系统中有多个产品族，而系统一次只可能消费其中一族产品；
+同属于同一个产品族的产品一起使用时。
+
+抽象工厂模式的各个角色如下（和工厂方法模式基本相同）：
+
+抽象工厂角色：这是工厂方法模式的核心，它与应用程序无关。是具体工厂角色必须实现的接口或者必须继承的父类。在java中它由抽象类或者接口来实现。
+具体工厂角色：它含有和具体业务逻辑有关的代码。由应用程序调用以创建对应的具体产品的对象。在java中它由具体的类来实现。
+抽象产品角色：它是具体产品继承的父类或者是实现的接口。在java中一般有抽象类或者接口来实现。
+具体产品角色：具体工厂角色所创建的对象就是此角色的实例。在java中由具体的类来实现。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Java模式之抽象工厂模式"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-15T08:11:03.000Z"><a href="/2014/03/15/Java-design-pattern-abstract-factory/">Mar 15 2014</a></time>
+      
+      
+  
+    <h1 class="title">Java模式之抽象工厂模式</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>上一篇我们使用了工厂方法模式，使系统很好地满足了开闭原则，增强了系统的扩展性，但是我们忽视了一点，就是人类有性别之分，无论什么颜色的人种，都有男女之分。在这里，我们要引出一个产品族的概念，抽象的定义是：位于不同产品等级结构中，功能相关联的产品组成的家族。在我们的例子中，男人就是一个产品族，女人是另外一个产品族。抽象工厂模式的用意为：给客户端提供一个接口，可以创建多个产品族中的产品对象。使用抽象工厂模式要满足以下条件：</p>
+<ol>
+<li>系统中有多个产品族，而系统一次只可能消费其中一族产品；</li>
+<li>同属于同一个产品族的产品一起使用时。</li>
+</ol>
+<p>抽象工厂模式的各个角色如下（和工厂方法模式基本相同）：</p>
+<ol>
+<li>抽象工厂角色：这是工厂方法模式的核心，它与应用程序无关。是具体工厂角色必须实现的接口或者必须继承的父类。在java中它由抽象类或者接口来实现。</li>
+<li>具体工厂角色：它含有和具体业务逻辑有关的代码。由应用程序调用以创建对应的具体产品的对象。在java中它由具体的类来实现。</li>
+<li>抽象产品角色：它是具体产品继承的父类或者是实现的接口。在java中一般有抽象类或者接口来实现。</li>
+<li>具体产品角色：具体工厂角色所创建的对象就是此角色的实例。在java中由具体的类来实现。</li>
+</ol>
+<p><a id="more"></a><br>人类接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Human</span> </span>{</div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">laugh</span>();</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cry</span>();</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">gender</span>();</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>黄色人种抽象类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractYellowHuman</span> <span class="keyword">implements</span> <span class="title">Human</span> </span>{</div><div class="line"> </div><div class="line">    <span class="annotation">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">laugh</span>() {</div><div class="line">        System.out.println(<span class="string">"Yellow human is laughing."</span>);</div><div class="line">    }</div><div class="line"> </div><div class="line">    <span class="annotation">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cry</span>() {</div><div class="line">        System.out.println(<span class="string">"Yellow human is crying."</span>);</div><div class="line">    }</div><div class="line"> </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>黄色人种男人类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">YellowMaleHuman</span> <span class="keyword">extends</span> <span class="title">AbstractYellowHuman</span> </span>{</div><div class="line">    <span class="annotation">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">gender</span>() {</div><div class="line">        System.out.println(<span class="string">"Male yellow human."</span>);</div><div class="line">    }</div><div class="line"> </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>黄色人种女人类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">YellowFemaleHuman</span> <span class="keyword">extends</span> <span class="title">AbstractYellowHuman</span> </span>{</div><div class="line">    <span class="annotation">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">gender</span>() {</div><div class="line">        System.out.println(<span class="string">"Female yellow human."</span>);</div><div class="line">    }</div><div class="line"> </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>其他两色人种的代码实现与此类似，不再赘述。</p>
+<p>人类工厂接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HumanFactory</span> </span>{</div><div class="line">    <span class="keyword">public</span> Human <span class="title">createWhiteHuman</span>();</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> Human <span class="title">createYellowHuman</span>();</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> Human <span class="title">createBlackHuman</span>();</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>男人工厂类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MaleHumanFactory</span> <span class="keyword">implements</span> <span class="title">HumanFactory</span> </span>{</div><div class="line"> </div><div class="line">    <span class="annotation">@Override</span></div><div class="line">    <span class="keyword">public</span> Human <span class="title">createWhiteHuman</span>() {</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> WhiteMaleHuman();</div><div class="line">    }</div><div class="line"> </div><div class="line">    <span class="annotation">@Override</span></div><div class="line">    <span class="keyword">public</span> Human <span class="title">createYellowHuman</span>() {</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> YellowMaleHuman();</div><div class="line">    }</div><div class="line"> </div><div class="line">    <span class="annotation">@Override</span></div><div class="line">    <span class="keyword">public</span> Human <span class="title">createBlackHuman</span>() {</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BlackMaleHuman();</div><div class="line">    }</div><div class="line"> </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>女人工厂类：<br>```java<br>public class FemaleHumanFactory implements HumanFactory {</p>
+<pre><code><span class="annotation">@Override</span>
+<span class="keyword">public</span> Human <span class="title">createWhiteHuman</span>() {
+    <span class="keyword">return</span> <span class="keyword">new</span> WhiteFemaleHuman();
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> Human <span class="title">createYellowHuman</span>() {
+    <span class="keyword">return</span> <span class="keyword">new</span> YellowFemaleHuman();
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> Human <span class="title">createBlackHuman</span>() {
+    <span class="keyword">return</span> <span class="keyword">new</span> BlackFemaleHuman();
+}
+</code></pre><p>}</p>
+<h3 id="特点：">特点：</h3>
+<p>封装性好，只需要调用工厂类就可以生产产品，而不必关注产品实现的细节。另外就是横向扩展容易，纵向扩展困难。怎么理解呢，就是假如要增加一个双性人，只需要增加产品类和工厂就可以了，但是假如说要增加一个蓝色人种，就必须得修改工厂类的代码。还有一个非常大的有点，高内聚，低耦合，在一个较大的项目组，产品是由一批人定义开发的，但是提供其他成员访问的时候，只有工厂方法和产品的接口，也就是说只需要提供Product Interface 和Concrete Factory 就可以产生自己需要的对象和方法。</p>
+<h3 id="使用场景：">使用场景：</h3>
+<p>当一个对象族（或是一组没有任何关系的对象）都有相同的约束，则可以使用抽象工厂模式。例如在软件产品开发过程中，涉及到不同操作系统的时候，都可以考虑使用抽象工厂模式，例如一个应用，需要在三个不同平台上运行：Windows、Linux、MacOS上运行，通过抽象工厂模式屏蔽掉操作系统对应用的影响，三个不同操作系统上的软件功能、应用逻辑、UI都应该是非常类似，唯一不同的是调用不同的工厂方法，由不同的产品类去处理与操作系统交互的信息。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Java/">Java</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2014/03/15/Java-design-pattern-abstract-factory/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

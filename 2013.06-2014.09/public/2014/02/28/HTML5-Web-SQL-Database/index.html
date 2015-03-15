@@ -1,0 +1,273 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTML5之Web SQL Database | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="对于Web应用的存储，使用最多的莫过于Cookie了。Cookie用于弥补HTTP协议的无状态性，服务器可以使用Cookie中包含的信息来判断HTTP传输中的状态。但Cookie有自己固有的缺点：它的大小受限，大多数浏览器对Cookie大小限制为4K；Cookie机制可以在浏览器中被禁用；Cookie需要在客户端和服务器端来回地传送，繁琐且消耗带宽；存在安全风险，Cookie是以明文存放，可能被恶意客户修改，当然可以手动加密和解密Cookie，但这需要额外的编码，并且因为加密和解密需要消耗一定的时间而影响应用程序的性能。
+对于HTML5，也许很有用的就是它新推出的“Web Storage”（Web 存储）API，它包括localStorage和sessionStorage，对简单的键值对（比如应用程序设置）或简单对象（如应用程序状态）进行存储，使用本地和会话存储能够很好地完成，对于存储少量的数据非常有用，但是对大量的结构化数据进行处理时，它就力所不及了，而这正是HTML5的 “Web SQL Database” API的应用所在。我们将着重讨论三个方法：
+
+openDatabase()：这个方法使用现有数据库或创建新数据库创建数据库对象
+transaction()：这个方法允许我们根据情况控制事务提交或回滚
+executeSql()：这个方法用于执行真实的SQL查询">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="HTML5之Web SQL Database"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-02-28T04:14:57.000Z"><a href="/2014/02/28/HTML5-Web-SQL-Database/">Feb 28 2014</a></time>
+      
+      
+  
+    <h1 class="title">HTML5之Web SQL Database</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>对于Web应用的存储，使用最多的莫过于Cookie了。Cookie用于弥补HTTP协议的无状态性，服务器可以使用Cookie中包含的信息来判断HTTP传输中的状态。但Cookie有自己固有的缺点：它的大小受限，大多数浏览器对Cookie大小限制为4K；Cookie机制可以在浏览器中被禁用；Cookie需要在客户端和服务器端来回地传送，繁琐且消耗带宽；存在安全风险，Cookie是以明文存放，可能被恶意客户修改，当然可以手动加密和解密Cookie，但这需要额外的编码，并且因为加密和解密需要消耗一定的时间而影响应用程序的性能。</p>
+<p>对于HTML5，也许很有用的就是它新推出的“Web Storage”（Web 存储）API，它包括localStorage和sessionStorage，对简单的键值对（比如应用程序设置）或简单对象（如应用程序状态）进行存储，使用本地和会话存储能够很好地完成，对于存储少量的数据非常有用，但是对大量的结构化数据进行处理时，它就力所不及了，而这正是HTML5的 “Web SQL Database” API的应用所在。我们将着重讨论三个方法：</p>
+<ul>
+<li>openDatabase()：这个方法使用现有数据库或创建新数据库创建数据库对象</li>
+<li>transaction()：这个方法允许我们根据情况控制事务提交或回滚</li>
+<li>executeSql()：这个方法用于执行真实的SQL查询<br><a id="more"></a><h3 id="1-_打开连接并创建数据库">1. 打开连接并创建数据库</h3>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> database = openDatabase(<span class="string">"mydb"</span>, <span class="string">"1.0"</span>, <span class="string">"test web sql database"</span>, <span class="number">1024</span> * <span class="number">1024</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{});</div></pre></td></tr></table></figure>
+
+<p>openDatabase()方法打开一个已经存在的数据库，如果数据库不存在，它还可以创建数据库(sqlite数据库)。几个参数意义分别是：</p>
+<ol>
+<li>数据库名称；</li>
+<li>版本号,目前为1.0；</li>
+<li>对数据库的描述；</li>
+<li>设置数据的大小；</li>
+<li>回调函数(可省略)。</li>
+</ol>
+<p>初次调用时创建数据库，以后就是建立连接了。</p>
+<h3 id="2-_建立数据表">2. 建立数据表</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">database.transaction(<span class="function"><span class="keyword">function</span><span class="params">(tx)</span> </span>{</div><div class="line">    tx.executeSql(</div><div class="line">        <span class="string">"CREATE TABLE IF NOT EXISTS student (id INT UNIQUE, name TEXT)"</span>, [],</div><div class="line">        <span class="function"><span class="keyword">function</span><span class="params">(tx, result)</span> </span>{</div><div class="line">            alert(<span class="string">"Create table successfully."</span>);</div><div class="line">        },</div><div class="line">        <span class="function"><span class="keyword">function</span><span class="params">(tx, error)</span> </span>{</div><div class="line">            alert(<span class="string">"Create table failed:"</span> + error.message);</div><div class="line">        }</div><div class="line">    );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>executeSql()函数有四个参数，其意义分别是：</p>
+<ol>
+<li>表示查询的字符串，使用的SQL语言是SQLite 3.6.19;</li>
+<li>插入到查询中问号所在处的字符串数据;</li>
+<li>成功时执行的回调函数。返回两个参数：tx和执行的结果;</li>
+<li>失败时执行的回调函数。返回两个参数：tx和失败的错误信息。</li>
+</ol>
+<h3 id="3-_insert操作">3. insert操作</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> id = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">1000</span>+<span class="number">1</span>);</div><div class="line">database.transaction(<span class="function"><span class="keyword">function</span><span class="params">(tx)</span> </span>{</div><div class="line">    tx.executeSql(</div><div class="line">        <span class="string">"INSERT INTO student (id, name) values(?,?)"</span>, [id, <span class="string">"Jerry"</span>],</div><div class="line">        <span class="function"><span class="keyword">function</span><span class="params">(tx, result)</span> </span>{</div><div class="line">            alert(<span class="string">"Insert data successfully."</span>);</div><div class="line">        },</div><div class="line">        <span class="function"><span class="keyword">function</span><span class="params">(tx, error)</span> </span>{</div><div class="line">            alert(<span class="string">"Insert data failed:"</span> + error.message);</div><div class="line">        }</div><div class="line">    );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<h3 id="4-_query操作">4. query操作</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">database.transaction(<span class="function"><span class="keyword">function</span><span class="params">(tx)</span> </span>{</div><div class="line">    tx.executeSql(</div><div class="line">        <span class="string">"SELECT * FROM student"</span>, [],</div><div class="line">        <span class="function"><span class="keyword">function</span><span class="params">(tx, result)</span> </span>{</div><div class="line">            alert(<span class="string">"Query data successfully."</span>);</div><div class="line">        },</div><div class="line">        <span class="function"><span class="keyword">function</span><span class="params">(tx, error)</span> </span>{</div><div class="line">            alert(<span class="string">"Query data failed:"</span> + error.message);</div><div class="line">        }</div><div class="line">    );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>执行成功的回调函数有一参数result，其数据类型为SQLResultSet，为查询出来的数据集。<br>SQLResultSet 的定义为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">interface SQLResultSet {</div><div class="line">    readonly attribute long insertId;</div><div class="line">    readonly attribute long rowsAffected;</div><div class="line">    readonly attribute SQLResultSetRowList rows;</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>其中最重要的属性—SQLResultSetRowList 类型的 rows 是数据集的“行” 。rows有两个属性：length、item 。故获取查询结果的某一行某一列的值 ：result.rows[i].item[fieldname]</p>
+<h3 id="5-_update操作">5. update操作</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">database.transaction(<span class="function"><span class="keyword">function</span><span class="params">(tx)</span> </span>{</div><div class="line">    tx.executeSql(</div><div class="line">        <span class="string">"UPDATE student SET name=? WHERE id=?"</span>, [name, id],</div><div class="line">        <span class="function"><span class="keyword">function</span><span class="params">(tx, result)</span> </span>{</div><div class="line">            alert(<span class="string">"Update data successfully."</span>);</div><div class="line">        },</div><div class="line">        <span class="function"><span class="keyword">function</span><span class="params">(tx, error)</span> </span>{</div><div class="line">            alert(<span class="string">"Update data failed:"</span> + error.message);</div><div class="line">        }</div><div class="line">    );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<h3 id="6-_delete操作">6. delete操作</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">database.transaction(<span class="function"><span class="keyword">function</span><span class="params">(tx)</span> </span>{</div><div class="line">    tx.executeSql(</div><div class="line">        <span class="string">"DELETE FROM student WHERE id=?"</span>, [id],</div><div class="line">        <span class="function"><span class="keyword">function</span><span class="params">(tx, result)</span> </span>{</div><div class="line">            alert(<span class="string">"Delete data successfully."</span>);</div><div class="line">        },</div><div class="line">        <span class="function"><span class="keyword">function</span><span class="params">(tx, error)</span> </span>{</div><div class="line">            alert(<span class="string">"Delete data failed:"</span> + error.message);</div><div class="line">        }</div><div class="line">    );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<h3 id="参考文章">参考文章</h3>
+<p><a href="http://www.ibm.com/developerworks/cn/web/1108_zhaifeng_websqldb/" target="_blank" rel="external">基于 HTML5 中的 Web SQL Database 来构建应用程序</a><br><a href="http://www.cnblogs.com/xumingxiang/archive/2012/03/25/2416418.html" target="_blank" rel="external">HTML5开发学习（3）:本地存储之Web Sql Database（附源码）</a><br><a href="http://www.w3.org/TR/webdatabase/" target="_blank" rel="external">Web SQL Database</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/HTML5/">HTML5</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2014/02/28/HTML5-Web-SQL-Database/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

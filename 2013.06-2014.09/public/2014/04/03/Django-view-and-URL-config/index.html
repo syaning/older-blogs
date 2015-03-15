@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Django视图和URL配置 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="1. 简单视图和URL配置
+1234from django.http import HttpResponse def hello(request):    return HttpResponse(&#39;Hello world&#39;)
+
+
+
+123urlpatterns = patterns(&#39;&#39;,    (r&#39;^hello/$&#39;, hello),)
+
+这里注意网站根目录可以使用^$（表示一个空字符串）进行配置，如：
+123urlpatterns = patterns(&#39;&#39;,    (&#39;^$&#39;, my_homepage_view),)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Django视图和URL配置"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-03T07:07:36.000Z"><a href="/2014/04/03/Django-view-and-URL-config/">Apr 3 2014</a></time>
+      
+      
+  
+    <h1 class="title">Django视图和URL配置</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="1-_简单视图和URL配置">1. 简单视图和URL配置</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(request)</span>:</span></div><div class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">'Hello world'</span>)</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^hello/$'</span>, hello),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<p>这里注意网站根目录可以使用^$（表示一个空字符串）进行配置，如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">'^$'</span>, my_homepage_view),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="2-_动态URL配置">2. 动态URL配置</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> Http404, HttpResponse</div><div class="line"><span class="keyword">import</span> datetime</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hours_ahead</span><span class="params">(request, offset)</span>:</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        offset = int(offset)</div><div class="line">    <span class="keyword">except</span> ValueError:</div><div class="line">        <span class="keyword">raise</span> Http404()</div><div class="line">    dt = datetime.datetime.now() + datetime.timedelta(hours=offset)</div><div class="line">    html = <span class="string">"&lt;html&gt;&lt;body&gt;In %s hour(s), it will be %s.&lt;/body&gt;&lt;/html&gt;"</span> % (offset, dt)</div><div class="line">    <span class="keyword">return</span> HttpResponse(html)</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^time/plus/(\d{1,2})/$'</span>, hours_ahead),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<h3 id="3-_视图字符串">3. 视图字符串</h3>
+<p>通常的url配置里是导入视图，然后再url里配置视图对象。另外一种做法是不使用视图对象，而是使用视图字符串,这样就不必导入视图，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^hello/$'</span>, <span class="string">'mysite.views.hello'</span>),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<p>使用这种方法的时候，可以使用公共前缀URL，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">'mysite.views'</span>,</div><div class="line">    (<span class="string">r'^hello/$'</span>, <span class="string">'hello'</span>),</div><div class="line">    (<span class="string">r'^time/$'</span>, <span class="string">'current_datetime'</span>),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<p>当所需要的视图有多个前缀的时候，可以使用多个公共前缀，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">'mysite.views'</span>,</div><div class="line">    (<span class="string">r'^hello/$'</span>, <span class="string">'hello'</span>),</div><div class="line">    (<span class="string">r'^time/$'</span>, <span class="string">'current_datetime'</span>),</div><div class="line">)</div><div class="line"> </div><div class="line">urlpatterns += patterns(<span class="string">'weblog.views'</span>,</div><div class="line">    (<span class="string">r'^tag/(\w+)/$'</span>, <span class="string">'tag'</span>),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<h3 id="4-_调试模式特例">4. 调试模式特例</h3>
+<p>有时候可能需要在调试模式下修改 URLconf 的行为，这个时候只需要在运行时检查DEBUG配置项即可，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^$'</span>, views.homepage),</div><div class="line">    (<span class="string">r'^(\d{4})/([a‐z]{3})/$'</span>, views.archive_month),</div><div class="line">)</div><div class="line"> </div><div class="line"><span class="keyword">if</span> settings.DEBUG:</div><div class="line">    urlpatterns += patterns(<span class="string">''</span>,</div><div class="line">        (<span class="string">r'^debuginfo/$'</span>, views.debug),</div><div class="line">    )</div></pre></td></tr></table></figure>
+
+<h3 id="5-_使用关键字参数">5. 使用关键字参数</h3>
+<p>先来看一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^articles/(\d{4})/$'</span>, views.year_archive),</div><div class="line">    (<span class="string">r'^articles/(\d{4})/(\d{2})/$'</span>, views.month_archive),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<p>在这里小括号括住的部分是传递给视图的参数，因为参数是未命名的，因此视图接受参数的时候是按照其位置顺序的，这样不仅缺乏灵活性，而且参数不具备可读性，下面我们使用关键字参数来解决这些问题，如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^articles/(?P&lt;year&gt;\d{4})/$'</span>, views.year_archive),</div><div class="line">    (<span class="string">r'^articles/(?P&lt;year&gt;\d{4})/(?P&lt;month&gt;\d{2})/$'</span>, views.month_archive),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<h3 id="6-_向视图函数传递额外参数">6. 向视图函数传递额外参数</h3>
+<p>首先来看个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">########## urls.py ##########</span></div><div class="line"><span class="keyword">from</span> django.conf.urls.defaults <span class="keyword">import</span> *</div><div class="line"><span class="keyword">from</span> mysite <span class="keyword">import</span> views</div><div class="line"> </div><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^foo/$'</span>, views.foo_view),</div><div class="line">    (<span class="string">r'^bar/$'</span>, views.bar_view),</div><div class="line">)</div><div class="line"> </div><div class="line"><span class="comment">########## views.py ##########</span></div><div class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render_to_response</div><div class="line"><span class="keyword">from</span> mysite.models <span class="keyword">import</span> MyModel</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo_view</span><span class="params">(request)</span>:</span></div><div class="line">    m_list = MyModel.objects.filter(is_new=<span class="keyword">True</span>)</div><div class="line">    <span class="keyword">return</span> render_to_response(<span class="string">'template1.html'</span>, {<span class="string">'m_list'</span>: m_list})</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar_view</span><span class="params">(request)</span>:</span></div><div class="line">    m_list = MyModel.objects.filter(is_new=<span class="keyword">True</span>)</div><div class="line">    <span class="keyword">return</span> render_to_response(<span class="string">'template2.html'</span>, {<span class="string">'m_list'</span>: m_list})</div></pre></td></tr></table></figure>
+
+<p>我们会发现这两个视图基本上类似，只是使用了不同的模板，那么我们就希望能有一种方法来把这两个视图综合起来，从而避免代码的冗余，一个可行的解决方案是将两个url映射到同一个视图，同时将url作为参数传递给视图，然后通过在视图里判断url来确定使用的模板。这样做当然可行，但是假如我们修改了一个url，那么我们就必然得修改视图的代码，从而无法做到模块分离。此时通过将模板作为参数传递给视图是个很好的解决方法，如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">########## urls.py ##########</span></div><div class="line"><span class="keyword">from</span> django.conf.urls.defaults <span class="keyword">import</span> *</div><div class="line"><span class="keyword">from</span> mysite <span class="keyword">import</span> views</div><div class="line"> </div><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^foo/$'</span>, views.foobar_view, {<span class="string">'template_name'</span>: <span class="string">'template1.html'</span>}),</div><div class="line">    (<span class="string">r'^bar/$'</span>, views.foobar_view, {<span class="string">'template_name'</span>: <span class="string">'template2.html'</span>}),</div><div class="line">)</div><div class="line"> </div><div class="line"><span class="comment">########## views.py ##########</span></div><div class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render_to_response</div><div class="line"><span class="keyword">from</span> mysite.models <span class="keyword">import</span> MyModel</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">foobar_view</span><span class="params">(request, template_name)</span>:</span></div><div class="line">    m_list = MyModel.objects.filter(is_new=<span class="keyword">True</span>)</div><div class="line">    <span class="keyword">return</span> render_to_response(template_name, {<span class="string">'m_list'</span>: m_list})</div></pre></td></tr></table></figure>
+
+<p>通过这种方法我们可以伪造URLconf参数，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^mydata/birthday/$'</span>, views.my_view, {<span class="string">'month'</span>: <span class="string">'jan'</span>, <span class="string">'day'</span>: <span class="string">'06'</span>}),</div><div class="line">    (<span class="string">r'^mydata/(?P&lt;month&gt;\w{3})/(?P&lt;day&gt;\d\d)/$'</span>, views.my_view),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<p>在这里 /mydata/birthday/ 完全等价于 /mydata/jan/06/ ，视图函数只关心获得参数，而不必关心这些参数是捕捉到的还是额外提供的。另外应当注意的是假如捕捉到的参数和额外的参数有着同样的参数名字，那么额外提供的参数将会被使用。</p>
+<h3 id="7-_通用视图">7. 通用视图</h3>
+<p>通用视图是基于额外参数的，我们先来看一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">########## urls.py ##########</span></div><div class="line"><span class="keyword">from</span> django.conf.urls.defaults <span class="keyword">import</span> *</div><div class="line"><span class="keyword">from</span> mysite <span class="keyword">import</span> views</div><div class="line"> </div><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^events/$'</span>, views.event_list),</div><div class="line">    (<span class="string">r'^blog/entries/$'</span>, views.entry_list),</div><div class="line">)</div><div class="line"><span class="comment">########## views.py ##########</span></div><div class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render_to_response</div><div class="line"><span class="keyword">from</span> mysite.models <span class="keyword">import</span> Event, BlogEntry</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">event_list</span><span class="params">(request)</span>:</span></div><div class="line">    obj_list = Event.objects.all()</div><div class="line">    <span class="keyword">return</span> render_to_response(<span class="string">'mysite/event_list.html'</span>, {<span class="string">'event_list'</span>: obj_list})</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">entry_list</span><span class="params">(request)</span>:</span></div><div class="line">    obj_list = BlogEntry.objects.all()</div><div class="line">    <span class="keyword">return</span> render_to_response(<span class="string">'mysite/blogentry_list.html'</span>, {<span class="string">'entry_list'</span>: obj_list})</div></pre></td></tr></table></figure>
+
+<p>我们会发现这两个视图非常类似，现在加入我们加入了一个users的url，那么就得在定义一个user_list的视图，这样并不是一个好的方式，我们可以通过以下方式进行高度的抽象创建通用视图，从而减少代码冗余：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">########## urls.py ##########</span></div><div class="line"><span class="keyword">from</span> django.conf.urls.defaults <span class="keyword">import</span> *</div><div class="line"><span class="keyword">from</span> mysite <span class="keyword">import</span> models, views</div><div class="line"> </div><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^events/$'</span>, views.object_list, {<span class="string">'model'</span>: models.Event}),</div><div class="line">    (<span class="string">r'^blog/entries/$'</span>, views.object_list, {<span class="string">'model'</span>: models.BlogEntry}),</div><div class="line">)</div><div class="line"><span class="comment">########## views.py ##########</span></div><div class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render_to_response</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">object_list</span><span class="params">(request, model)</span>:</span></div><div class="line">    obj_list = model.objects.all()</div><div class="line">    template_name = <span class="string">'mysite/%s_list.html'</span> % model.__name__.lower()</div><div class="line">    <span class="keyword">return</span> render_to_response(template_name, {<span class="string">'object_list'</span>: obj_list})</div></pre></td></tr></table></figure>
+
+<h3 id="8-_缺省视图参数">8. 缺省视图参数</h3>
+<p>有些情况下我们需要给视图提供缺省的参数值，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">########## urls.py ##########</span></div><div class="line"><span class="keyword">from</span> django.conf.urls.defaults <span class="keyword">import</span> *</div><div class="line"><span class="keyword">from</span> mysite <span class="keyword">import</span> views</div><div class="line"> </div><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^blog/$'</span>, views.page),</div><div class="line">    (<span class="string">r'^blog/page(?P&lt;num&gt;\d+)/$'</span>, views.page),</div><div class="line">)</div><div class="line"><span class="comment">########## views.py ##########</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">page</span><span class="params">(request, num=<span class="string">'1'</span>)</span>:</span></div><div class="line">    <span class="comment"># do something</span></div></pre></td></tr></table></figure>
+
+<p>这里注意视图捕获的参数总是字符串，因此我们使用的是字符串‘1’而不是数字1.</p>
+<h3 id="9-_请求方法分支">9. 请求方法分支</h3>
+<p>在url与视图的配置中，特定的url映射到特定的视图，而没有考虑此事请求方法是GET还是POST，或者是其它。一种可行的做法是在视图处理函数中，通过 request.method 来判断请求所使用的方法，根据不同的方法做出不同的处理，但是这样将多个处理方法写在同一个视图里并不是一个好的做法，我们可以这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">########## views.py ##########</span></div><div class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> Http404, HttpResponseRedirect</div><div class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render_to_response</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">method_splitter</span><span class="params">(request, *args, **kwargs)</span>:</span></div><div class="line">    get_view = kwargs.pop(<span class="string">'GET'</span>, <span class="keyword">None</span>)</div><div class="line">    post_view = kwargs.pop(<span class="string">'POST'</span>, <span class="keyword">None</span>)</div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span> <span class="keyword">and</span> get_view <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> get_view(request, *args, **kwargs)</div><div class="line">    <span class="keyword">elif</span> request.method == <span class="string">'POST'</span> <span class="keyword">and</span> post_view <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> post_view(request, *args, **kwargs)</div><div class="line">    <span class="keyword">raise</span> Http404</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">some_page_get</span><span class="params">(request)</span>:</span></div><div class="line">    <span class="keyword">assert</span> request.method == <span class="string">'GET'</span></div><div class="line">    do_something_for_get()</div><div class="line">    <span class="keyword">return</span> render_to_response(<span class="string">'page.html'</span>)</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">some_page_post</span><span class="params">(request)</span>:</span></div><div class="line">    <span class="keyword">assert</span> request.method == <span class="string">'POST'</span></div><div class="line">    do_something_for_post()</div><div class="line">    <span class="keyword">return</span> HttpResponseRedirect(<span class="string">'/someurl/'</span>)</div><div class="line"><span class="comment">########## urls.py ##########</span></div><div class="line"><span class="keyword">from</span> django.conf.urls.defaults <span class="keyword">import</span> *</div><div class="line"><span class="keyword">from</span> mysite <span class="keyword">import</span> views</div><div class="line"> </div><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">(<span class="string">r'^somepage/$'</span>, views.method_splitter, {<span class="string">'GET'</span>: views.some_page_get, <span class="string">'POST'</span>: views.some_page_p}),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<h3 id="10-_包装视图函数">10. 包装视图函数</h3>
+<p>先试想一个场景，假如有些视图需要用户登录后才能使用，那么再这些视图的开始都需要检测用户的登录状态，这样就造成了代码冗余，此时我们可以通过包装视图函数来解决，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">requires_login</span><span class="params">(view)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">new_view</span><span class="params">(request, *args, **kwargs)</span>:</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> request.user.is_authenticated():</div><div class="line">            <span class="keyword">return</span> HttpResponseRedirect(<span class="string">'/accounts/login/'</span>)</div><div class="line">        <span class="keyword">return</span> view(request, *args, **kwargs)</div><div class="line">    <span class="keyword">return</span> new_view</div></pre></td></tr></table></figure>
+
+<p>函数requires_login传入一个视图函数view，然后返回一个新的视图函数new_view，这个新的视图函数new_view在函数requires_login内定义，处理request.user.is_authenticated()这个验证,从而决定是否执行原来的view函数。之后我们可以这样配置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^view1/$'</span>, requires_login(my_view1)),</div><div class="line">    (<span class="string">r'^view2/$'</span>, requires_login(my_view2)),</div><div class="line">    (<span class="string">r'^view3/$'</span>, requires_login(my_view3)),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<h3 id="11-_包含其它URLconf">11. 包含其它URLconf</h3>
+<p>一个URLconf可以包含其它的URLconf模块，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">urlpatterns = patterns(<span class="string">''</span>,</div><div class="line">    (<span class="string">r'^weblog/'</span>, include(<span class="string">'mysite.blog.urls'</span>)),</div><div class="line">    (<span class="string">r'^photos/'</span>, include(<span class="string">'mysite.photos.urls'</span>)),</div><div class="line">    (<span class="string">r'^about/$'</span>, <span class="string">'mysite.views.about'</span>),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<p>这里要注意有include的url配置没有$作为结尾。同样，我们也可以传递额外的参数给使用了include的配置。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Python/">Python</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2014/04/03/Django-view-and-URL-config/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

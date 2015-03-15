@@ -1,0 +1,567 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-09-20T07:43:14.000Z"><a href="/2014/09/20/MongoDB-register-windows-service/">Sep 20 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>以管理员权限运行命令行，在MongoDB安装目录的bin目录下，执行：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod --install --serviceName <span class="type">MongoDB</span> --serviceDisplayName <span class="type">MongoDB</span> --logpath <span class="string">"D:\Program Files\MongoDB 2.6 Standard\log\mongodb.log"</span> --dbpath <span class="string">"D:\Program Files\MongoDB 2.6 Standard\data"</span> --directoryperdb</div></pre></td></tr></table></figure>
+
+<p>其中logpath指定日志文件存放位置，dbpath指定数据库数据文件存放位置，directoryperdb表示为每个数据库生成一个文件夹。</p>
+<h3 id="参考文章">参考文章</h3>
+<p><a href="http://blog.csdn.net/chaijunkun/article/details/7227967" target="_blank" rel="external">MongoDB安装为Windows服务方法与注意事项</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-09-14T05:00:32.000Z"><a href="/2014/09/14/jQuery-plugin-multiscroll/">Sep 14 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近发现了一个不错的多页面滚动插件 <a href="https://github.com/alvarotrigo/multiscroll.js" target="_blank" rel="external">multiscroll</a>，之前jQuery也没少用，但是都是一些常用的功能，对jQuery的理解并不算深刻，而且对于jQuery插件的开发也没有涉及过。因此借助这个插件，顺便了解一下jQuery的一些未曾接触过的API函数。</p>
+<p>通过看源码可以得知整个multiscroll函数接受一个options的参数，然后是将options扩展到默认的参数选项，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">options = $.extend({</div><div class="line">	<span class="string">'verticalCentered'</span> : <span class="literal">true</span>,</div><div class="line">	<span class="string">'scrollingSpeed'</span>: <span class="number">700</span>,</div><div class="line">	<span class="string">'easing'</span>: <span class="string">'easeInQuart'</span>,</div><div class="line">	<span class="string">'menu'</span>: <span class="literal">false</span>,</div><div class="line">	<span class="comment">// ... ...</span></div><div class="line">}, options);</div></pre></td></tr></table></figure>
+
+<p>这里先来了解一下<code>$.extend</code>函数，可参考<a href="http://api.jquery.com/jQuery.extend/" target="_blank" rel="external">官方API</a>，因此这里第一个参数是定义的默认选项，传入的参数options是用户定义的选项，所以就是用用户的选项覆盖掉默认的选项。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/09/14/jQuery-plugin-multiscroll/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-09-10T14:23:03.000Z"><a href="/2014/09/10/string-array-questions-1/">Sep 10 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="1-_在一个字符串中找到第一个只出现一次的字符">1. 在一个字符串中找到第一个只出现一次的字符</h3>
+<p>如果针对每个字符都遍历整个字符串，那么时间复杂度为O(n^2)，因此好的做法是第一次遍历字符串，存成哈希表，第二次遍历字符串，找到第一个只出现一次的字符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">firstSingleChar</span><span class="params">(s)</span>:</span></div><div class="line">    dic = {}</div><div class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</div><div class="line">        v = dic.get(c)</div><div class="line">        dic[c] = v + <span class="number">1</span> <span class="keyword">if</span> v <span class="keyword">else</span> <span class="number">1</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</div><div class="line">        v = dic.get(c)</div><div class="line">        <span class="keyword">if</span> v == <span class="number">1</span>:</div><div class="line">            <span class="keyword">return</span> c</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="keyword">None</span></div></pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/09/10/string-array-questions-1/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-20T14:45:47.000Z"><a href="/2014/08/20/linkedlist-questions-2/">Aug 20 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="1-_求单链表的倒数第k个元素">1. 求单链表的倒数第k个元素</h3>
+<p>使用两个指针，第一个指针先走k步，然后第二个指针从头开始走，当第一个指针到达结尾时，第二个指针所在位置即为所求。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">printList</span><span class="params">(lst)</span>:</span></div><div class="line">    temp = lst</div><div class="line">    <span class="keyword">while</span> temp != <span class="keyword">None</span>:</div><div class="line">        print(temp.val, end=<span class="string">' '</span>)</div><div class="line">        temp = temp.next</div></pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/08/20/linkedlist-questions-2/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-19T12:09:06.000Z"><a href="/2014/08/19/linkedlist-questions-1/">Aug 19 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、判断链表是否有环">一、判断链表是否有环</h3>
+<p>在开始之前，我们先来定义链表节点的结构，并且不封装节点成为链表，因此我们在之后的所有操作中都是直接操作节点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, val)</span>:</span></div><div class="line">        self.val = val</div><div class="line">        self.next = <span class="keyword">None</span></div><div class="line"></div><div class="line">n1 = Node(<span class="number">1</span>)</div><div class="line">n2 = Node(<span class="number">2</span>)</div><div class="line">n3 = Node(<span class="number">3</span>)</div><div class="line">n4 = Node(<span class="string">'a'</span>)</div><div class="line">n5 = Node(<span class="string">'b'</span>)</div><div class="line">n6 = Node(<span class="string">'c'</span>)</div><div class="line">n7 = Node(<span class="number">10</span>)</div><div class="line">n8 = Node(<span class="number">11</span>)</div></pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/08/19/linkedlist-questions-1/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-18T12:31:09.000Z"><a href="/2014/08/18/Node-picture-crawler/">Aug 18 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/08/18/Node-picture-crawler/">Node抓取图片</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>之前用Python写过一个抓取豆瓣妹子的爬虫，最近在看Node，索性就用Node重新写了一个。代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> baseURL = <span class="string">"http://dbmeizi.com/?p="</span>;</div><div class="line"><span class="keyword">var</span> reg = <span class="regexp">/http:\/\/pic.dbmeizi.com\/pics\/\d+\/p\d+.jpg/gi</span>;</div><div class="line"><span class="keyword">var</span> baseDir = <span class="string">"dbmeizi/"</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">crawImages</span><span class="params">(startPage, endPage)</span> </span>{</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = startPage; i &lt;= endPage; i++) {</div><div class="line">		<span class="keyword">var</span> pageURL = baseURL + i;</div><div class="line"></div><div class="line">		http.get(pageURL, <span class="function"><span class="keyword">function</span><span class="params">(response)</span> </span>{</div><div class="line">			<span class="keyword">var</span> html = [];</div><div class="line"></div><div class="line">			response.on(<span class="string">"data"</span>, <span class="function"><span class="keyword">function</span><span class="params">(chunk)</span> </span>{</div><div class="line">				html.push(chunk);</div><div class="line">			});</div><div class="line"></div><div class="line">			response.on(<span class="string">"end"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">				html = Buffer.concat(html).toString();</div><div class="line"></div><div class="line">				<span class="keyword">var</span> imgURLs = html.match(reg);</div><div class="line">				imgURLs.forEach(getImage);</div><div class="line">			});</div><div class="line">		});</div><div class="line">	}</div><div class="line">}</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getImage</span><span class="params">(imgURL)</span> </span>{</div><div class="line">	http.get(imgURL, <span class="function"><span class="keyword">function</span><span class="params">(response)</span> </span>{</div><div class="line">		<span class="keyword">var</span> imgName = baseDir + imgURL.substring(<span class="number">37</span>);</div><div class="line">		<span class="keyword">var</span> image = fs.createWriteStream(imgName);</div><div class="line"></div><div class="line">		response.on(<span class="string">"data"</span>, <span class="function"><span class="keyword">function</span><span class="params">(chunk)</span> </span>{</div><div class="line">			image.write(chunk);</div><div class="line">		});</div><div class="line"></div><div class="line">		response.on(<span class="string">"end"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">			image.end();</div><div class="line">			<span class="built_in">console</span>.log(imgName);</div><div class="line">		});</div><div class="line">	});</div><div class="line">}</div><div class="line"></div><div class="line">crawImages(<span class="number">0</span>, <span class="number">10</span>);</div></pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/08/18/Node-picture-crawler/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-08T16:03:58.000Z"><a href="/2014/08/09/Unix-file-system/">Aug 9 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/08/09/Unix-file-system/">Unix文件系统</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="块">块</h3>
+<p>Unix文件系统的最底层是物理设备，如磁盘、U盘等，这些物理设备的存储空间被划分为固定大小的单位，叫做块（block），块是文件存储的最小单元，例如一个文件有50K，当blocksize为2K时，需要25个block；当blocksize为4K时，则需要13个block来存储。blocksize需要考虑很多因素，当blocksize过大，那么存储多个小文件时就会浪费很多空间；如果blocksize过小，那么就需要更多的空间来记录block的分配情况，因此blocksize需要折中考虑，现在多数机器的blocksize为4K左右。</p>
+<p>下图表示的是文件系统的磁盘布局：<br><img src="/2014/08/09/Unix-file-system/fs-block-layout.png" alt=""></p>
+<ul>
+<li>引导块（Boot block）占用第0号物理块，不属于文件系统管辖，如果系统中有多个文件系统，只有根文件系统才有引导程序放在引导块中，其余文件系统都不使用引导块。</li>
+<li>超级块（Super block）一般位于磁盘的第1块，用来保存文件系统的一些基本信息，例如文件系统大小，位置等。</li>
+<li>位图（Bitmap）用来跟踪空闲块，位图中的第i位记录了第i块的使用情况。</li>
+<li>inode表记录inode信息（参看下文）。</li>
+<li><p>文件块（File block）用来存储文件内容。</p>
+<p>由于一个文件通常需要多个块，因此需要知道每个文件使用了哪些块，因此引入了inode来记录块和文件之间的隶属关系，inode的基本定义为：</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">structure inode</div><div class="line">	<span class="keyword">integer</span> block_numbers[N]<span class="comment">	//组成文件的块号</span></div><div class="line">	<span class="keyword">integer</span> size<span class="comment">	//文件大小（单位：字节）</span></div></pre></td></tr></table></figure>
+
+<p>第六版的Unix系统使用这个算法来处理块数不大于8的文件，当文件较大时，inode的前7块为间接块，其中存储块号，第8块为二次间接块。假如blocksize为512B，每个块号为2B，那么每个块可以存储256个块号，因此一个文件最多可以有7x256+1x256x256=67328个块。</p>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/08/09/Unix-file-system/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-04T14:43:13.000Z"><a href="/2014/08/04/CSS-position-center/">Aug 4 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/08/04/CSS-position-center/">CSS居中定位</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在CSS+DIV设计中，经常会遇到组件居中，在不同的情况下可能会需要不同的样式，下面根据不同情况详细进行分析。</p>
+<h3 id="固定宽度元素水平居中">固定宽度元素水平居中</h3>
+<p>对于固定宽度的元素，水平居中有以下方式：</p>
+<h4 id="1-_通过设定左右margin为auto来居中">1. 通过设定左右margin为auto来居中</h4>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class">.test</span><span class="rules">{</span></div><div class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">300px</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">0</span> auto</span></span>;</div><div class="line"></div><div class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">30px</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>这种方法尤其要注意需要是定宽，否则无法实现居中。</p>
+<h4 id="2-_通过left和margin-left来居中(或者使用right和margin-right)">2. 通过left和margin-left来居中(或者使用right和margin-right)</h4>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class">.test</span><span class="rules">{</span></div><div class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">300px</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50%</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">margin-left</span>:<span class="value"> -<span class="number">150px</span></span></span>;</div><div class="line"></div><div class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">30px</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line">	<span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/08/04/CSS-position-center/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-07-13T05:56:23.000Z"><a href="/2014/07/13/Javascript-coding-standards/">Jul 13 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/07/13/Javascript-coding-standards/">Javascript编码规范</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="https://github.com/airbnb/javascript" target="_blank" rel="external">https://github.com/airbnb/javascript</a><br><a href="http://alloyteam.github.io/JX/doc/specification/google-javascript.xml" target="_blank" rel="external">http://alloyteam.github.io/JX/doc/specification/google-javascript.xml</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-07-11T05:58:16.000Z"><a href="/2014/07/11/Javascript-array-operations/">Jul 11 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/07/11/Javascript-array-operations/">Javascript数组操作</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="1-_forEach遍历数组">1. forEach遍历数组</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</div><div class="line">arr.forEach(<span class="function"><span class="keyword">function</span><span class="params">(x)</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log(x);</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<h3 id="2-_filter过滤数组">2. filter过滤数组</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</div><div class="line"><span class="keyword">var</span> newArr = arr.filter(<span class="function"><span class="keyword">function</span><span class="params">(x)</span> </span>{</div><div class="line">    <span class="keyword">return</span> x % <span class="number">2</span> == <span class="number">0</span>;</div><div class="line">});</div><div class="line"><span class="built_in">console</span>.log(newArr);</div></pre></td></tr></table></figure>
+
+<h3 id="3-_map对数组每一项执行函数，结果作为新数组返回">3. map对数组每一项执行函数，结果作为新数组返回</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</div><div class="line"><span class="keyword">var</span> newArr = arr.map(<span class="function"><span class="keyword">function</span><span class="params">(x)</span> </span>{</div><div class="line">    <span class="keyword">return</span> x * x;</div><div class="line">});</div><div class="line"><span class="built_in">console</span>.log(newArr);</div></pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/07/11/Javascript-array-operations/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+  
+    <a href="/page/2/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

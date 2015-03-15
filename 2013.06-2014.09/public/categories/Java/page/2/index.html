@@ -1,0 +1,381 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 2 | Java | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title category">Java</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-15T08:11:03.000Z"><a href="/2014/03/15/Java-design-pattern-abstract-factory/">Mar 15 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/15/Java-design-pattern-abstract-factory/">Java模式之抽象工厂模式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>上一篇我们使用了工厂方法模式，使系统很好地满足了开闭原则，增强了系统的扩展性，但是我们忽视了一点，就是人类有性别之分，无论什么颜色的人种，都有男女之分。在这里，我们要引出一个产品族的概念，抽象的定义是：位于不同产品等级结构中，功能相关联的产品组成的家族。在我们的例子中，男人就是一个产品族，女人是另外一个产品族。抽象工厂模式的用意为：给客户端提供一个接口，可以创建多个产品族中的产品对象。使用抽象工厂模式要满足以下条件：</p>
+<ol>
+<li>系统中有多个产品族，而系统一次只可能消费其中一族产品；</li>
+<li>同属于同一个产品族的产品一起使用时。</li>
+</ol>
+<p>抽象工厂模式的各个角色如下（和工厂方法模式基本相同）：</p>
+<ol>
+<li>抽象工厂角色：这是工厂方法模式的核心，它与应用程序无关。是具体工厂角色必须实现的接口或者必须继承的父类。在java中它由抽象类或者接口来实现。</li>
+<li>具体工厂角色：它含有和具体业务逻辑有关的代码。由应用程序调用以创建对应的具体产品的对象。在java中它由具体的类来实现。</li>
+<li>抽象产品角色：它是具体产品继承的父类或者是实现的接口。在java中一般有抽象类或者接口来实现。</li>
+<li>具体产品角色：具体工厂角色所创建的对象就是此角色的实例。在java中由具体的类来实现。</li>
+</ol>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/15/Java-design-pattern-abstract-factory/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-14T08:08:38.000Z"><a href="/2014/03/14/Java-design-pattern-factory-method/">Mar 14 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/14/Java-design-pattern-factory-method/">Java模式之工厂方法模式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>接着上一篇的简单工厂模式来讲。在简单工厂模式中，工厂类作为核心类，负责产品实例的生产，但是会有这样一个问题，每次增加一个新的产品，都必须要修改工厂类，这样就不利于扩展。因此在工厂方法模式中，使用了一个抽象的工厂来作为核心。下面是它的组成：</p>
+<ol>
+<li>抽象工厂角色：这是工厂方法模式的核心，它与应用程序无关。是具体工厂角色必须实现的接口或者必须继承的父类。在java中它由抽象类或者接口来实现。</li>
+<li>具体工厂角色：它含有和具体业务逻辑有关的代码。由应用程序调用以创建对应的具体产品的对象。在java中它由具体的类来实现。</li>
+<li>抽象产品角色：它是具体产品继承的父类或者是实现的接口。在java中一般有抽象类或者接口来实现。</li>
+<li>具体产品角色：具体工厂角色所创建的对象就是此角色的实例。在java中由具体的类来实现。</li>
+</ol>
+<p>接着上一篇的例子，Human，WhiteHuman，YellowHuman以及BlackHuman都不变，HumanFactory改成一个接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HumanFactory</span> </span>{</div><div class="line">    <span class="keyword">public</span> Human <span class="title">createHuman</span>();</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/14/Java-design-pattern-factory-method/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-14T08:05:43.000Z"><a href="/2014/03/14/Java-design-pattern-factory/">Mar 14 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/14/Java-design-pattern-factory/">Java模式之简单工厂模式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>简单工厂模式又叫静态工厂模式，顾名思义，它是用来实例化目标类的静态类。通常由以下三种角色组成：</p>
+<ol>
+<li>工厂类角色：这是本模式的核心，含有一定的商业逻辑和判断逻辑，在java中它往往由一个具体类实现；</li>
+<li>抽象产品角色：它一般是具体产品继承的父类或者实现的接口，在java中由接口或者抽象类来实现；</li>
+<li>具体产品角色：工厂类所创建的对象就是此角色的实例，在java中由一个具体类实现。</li>
+</ol>
+<p>以女娲造人为例，有白种人、黄种人和黑种人。这里女娲造人所使用的工具就相当于是工厂，人类这一统称就是抽象产品，而具体的人种就是具体产品。</p>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/14/Java-design-pattern-factory/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-14T08:03:26.000Z"><a href="/2014/03/14/Java-design-pattern-multiton/">Mar 14 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/14/Java-design-pattern-multiton/">Java模式之多例模式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>多例模式实际上就是单例模式的推广，多例模式又划分为有上限多例模式和无上限多例模式两种，有上限多例模式中的多例类的实例是有上限的，当这个多例类中的上限数值上等于1时，此时，多例类退化回到了单例类；而对于无上限多例模式中的多例类，它的上限是没有限制的，也就是说它的上限数值是不确定的，在此我们近讨论有上限的多例模式。一个非常典型的例子就是一副麻将里只有两枚骰子。总的来说，多例模式有以下特点：</p>
+<ol>
+<li>多例类可以有多个实例；</li>
+<li>多例类必须自己创建自己的实例，并管理自己的实例，向外界提供自己的实例。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/14/Java-design-pattern-multiton/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-14T03:12:55.000Z"><a href="/2014/03/14/Java-design-pattern-singleton/">Mar 14 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/14/Java-design-pattern-singleton/">Java模式之单例模式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Java单例模式是一种常见的设计模式，该模式有以下三个特点：</p>
+<ol>
+<li>单例类只能有一个实例；</li>
+<li>单例类必须自己自己创建自己的唯一实例；</li>
+<li>单例类必须给所有其他对象提供这一实例。</li>
+</ol>
+<p>常用的单例模式设计有三种：懒汉式单例、饿汉式单例、登记式单例。</p>
+<h3 id="1-_懒汉式单例">1. 懒汉式单例</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>{</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {</div><div class="line"> </div><div class="line">    }</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>)</div><div class="line">            singleton = <span class="keyword">new</span> Singleton();</div><div class="line">        <span class="keyword">return</span> singleton;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/14/Java-design-pattern-singleton/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/categories/Java/" class="alignleft prev">Prev</a>
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

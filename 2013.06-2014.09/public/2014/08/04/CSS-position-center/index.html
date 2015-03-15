@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS居中定位 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="在CSS+DIV设计中，经常会遇到组件居中，在不同的情况下可能会需要不同的样式，下面根据不同情况详细进行分析。
+固定宽度元素水平居中
+对于固定宽度的元素，水平居中有以下方式：
+1. 通过设定左右margin为auto来居中
+1234567.test{	width: 300px;	margin: 0 auto;	height: 30px;	background: red;}
+
+这种方法尤其要注意需要是定宽，否则无法实现居中。
+2. 通过left和margin-left来居中(或者使用right和margin-right)
+123456789.test{	width: 300px;	left: 50%;	margin-left: -150px;	height: 30px;	background: red;	position: absolute;}">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="CSS居中定位"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-04T14:43:13.000Z"><a href="/2014/08/04/CSS-position-center/">Aug 4 2014</a></time>
+      
+      
+  
+    <h1 class="title">CSS居中定位</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在CSS+DIV设计中，经常会遇到组件居中，在不同的情况下可能会需要不同的样式，下面根据不同情况详细进行分析。</p>
+<h3 id="固定宽度元素水平居中">固定宽度元素水平居中</h3>
+<p>对于固定宽度的元素，水平居中有以下方式：</p>
+<h4 id="1-_通过设定左右margin为auto来居中">1. 通过设定左右margin为auto来居中</h4>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class">.test</span><span class="rules">{</span></div><div class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">300px</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">0</span> auto</span></span>;</div><div class="line"></div><div class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">30px</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>这种方法尤其要注意需要是定宽，否则无法实现居中。</p>
+<h4 id="2-_通过left和margin-left来居中(或者使用right和margin-right)">2. 通过left和margin-left来居中(或者使用right和margin-right)</h4>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class">.test</span><span class="rules">{</span></div><div class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">300px</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50%</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">margin-left</span>:<span class="value"> -<span class="number">150px</span></span></span>;</div><div class="line"></div><div class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">30px</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line">	<span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p><a id="more"></a></p>
+<h3 id="非固定宽度元素水平居中">非固定宽度元素水平居中</h3>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;meta charset="utf-8"&gt;</div><div class="line">&lt;title&gt;Examples&lt;/title&gt;</div><div class="line">&lt;style type="text/css"&gt;</div><div class="line">.outer{</div><div class="line">	position: absolute;</div><div class="line">	left: 50%;</div><div class="line"></div><div class="line">	background: red;</div><div class="line">}</div><div class="line">.inner{</div><div class="line">	position: relative;</div><div class="line">	right: 50%;</div><div class="line"></div><div class="line">	background: green;</div><div class="line">}</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">	&lt;div class="outer"&gt;</div><div class="line">		&lt;div class="inner"&gt;hello world&lt;/div&gt;</div><div class="line">	&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+
+<p>这种方法是在需要水平居中的元素外面套了一层div，然后外层div定位到50%的位置，内层div通过位置向左偏移50%即可居中，但此时inner的原始位置依然占用着，因为定位是relative，并未脱离文档流。</p>
+<h3 id="固定高度垂直居中布局">固定高度垂直居中布局</h3>
+<p>可以通过绝对布局和margin来实现，例如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class">.test</span> <span class="rules">{</span></div><div class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">300px</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">300px</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</div><div class="line">	<span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">50%</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50%</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">margin-left</span>:<span class="value"> -<span class="number">150px</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">margin-top</span>:<span class="value"> -<span class="number">150px</span></span></span>;</div><div class="line">	<span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<h3 id="非固定高度垂直居中布局">非固定高度垂直居中布局</h3>
+<h4 id="1-_使用flex布局">1. 使用flex布局</h4>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;meta charset="utf-8"&gt;</div><div class="line">&lt;title&gt;Examples&lt;/title&gt;</div><div class="line">&lt;style type="text/css"&gt;</div><div class="line">.outer {</div><div class="line">  display: -webkit-flex;</div><div class="line">  display: flex;</div><div class="line">  height: 300px;</div><div class="line"></div><div class="line">  background: red;</div><div class="line">}</div><div class="line">.inner {</div><div class="line">  margin: auto;</div><div class="line"></div><div class="line">  background: green;</div><div class="line">}</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">	&lt;div class="outer"&gt;</div><div class="line">		&lt;div class="inner"&gt;hello world&lt;/div&gt;</div><div class="line">	&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+
+<p>应当注意的是，目前flex的兼容性会存在比较多的问题。</p>
+<h3 id="参考文章">参考文章</h3>
+<p><a href="http://nodejs.in/csslayoutsite/dev/flexbox.html" target="_blank" rel="external">学习CSS布局-flexbox</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/CSS/">CSS</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2014/08/04/CSS-position-center/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

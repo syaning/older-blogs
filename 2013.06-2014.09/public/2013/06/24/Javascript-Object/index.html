@@ -1,0 +1,348 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Javascript对象 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="一、对象字面量来定义对象
+1234567var student = {    id : &quot;9924077&quot;,    name : &quot;test&quot;,    sclass : [ &quot;web&quot;, &quot;java&quot; ],    test : { x : 1,  y : 1 },    getId : function() { return this.id; }};
+
+注意：
+
+{}中属性名值对，名值间用冒号分开，彼此间用逗号分开
+如果属性名不是合法标识符，则需用 ” “括住，如”first-name”: “zhu”
+值可以是变量，可以是对象，方法可以认为是特殊的属性
+
+缺点：
+
+多个对象实例需逐个定义，代码冗长；
+多个对象实例不能共享方法，浪费内存；
+无法识别对象实例的类型；
+无法体现对象实例间关系。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Javascript对象"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-24T06:30:05.000Z"><a href="/2013/06/24/Javascript-Object/">Jun 24 2013</a></time>
+      
+      
+  
+    <h1 class="title">Javascript对象</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、对象字面量来定义对象">一、对象字面量来定义对象</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> student = {</div><div class="line">    id : <span class="string">"9924077"</span>,</div><div class="line">    name : <span class="string">"test"</span>,</div><div class="line">    sclass : [ <span class="string">"web"</span>, <span class="string">"java"</span> ],</div><div class="line">    test : { x : <span class="number">1</span>,  y : <span class="number">1</span> },</div><div class="line">    getId : <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.id; }</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>{}中属性名值对，名值间用冒号分开，彼此间用逗号分开</li>
+<li>如果属性名不是合法标识符，则需用 ” “括住，如”first-name”: “zhu”</li>
+<li>值可以是变量，可以是对象，方法可以认为是特殊的属性</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>多个对象实例需逐个定义，代码冗长；</li>
+<li>多个对象实例不能共享方法，浪费内存；</li>
+<li>无法识别对象实例的类型；</li>
+<li>无法体现对象实例间关系。<a id="more"></a>
+
+</li>
+</ol>
+<p>二、属性访问与操作<br><strong>属性访问（访问不存在的属性值会返回undefined）</strong></p>
+<ol>
+<li>可以使用点表示法，如student.id来访问属性；</li>
+<li>可以使用方括号表示法，如student[“id”]来访问属性。</li>
+<li>区别：前者属性名为标识符，所以应预先明确；后者属性名为字符串，可由程序动态生成。</li>
+</ol>
+<p><strong>属性操作：</strong></p>
+<ol>
+<li>可以通过把值赋予新属性来为对象添加属性，例如：student.room = “301”;</li>
+<li>可以通过赋值来修改属性，甚至可改变属性类型；</li>
+<li>可以使用for……in语句来遍历属性，如：for(var i in student)；</li>
+<li>只能遍历可枚举属性和方法；</li>
+<li>会将继承到的属性和方法一并枚举出来；</li>
+<li>遍历结果是乱序的，如果希望有序，可先自定义属性名数组；</li>
+<li>可以使用delete运算符来删除属性，如：delete student.room；删除后属性不止值被设为undefined，属性也不再被枚举到。</li>
+</ol>
+<h3 id="三、构造函数创建对象">三、构造函数创建对象</h3>
+<p>可以通过构造函数来创建多个同类对象，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span><span class="params">(id)</span> </span>{</div><div class="line">    <span class="keyword">this</span>.id = id;</div><div class="line">    <span class="keyword">this</span>.getId = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.id; };</div><div class="line">}</div><div class="line"><span class="keyword">var</span> student1 = <span class="keyword">new</span> Student(<span class="string">"9924077"</span>);</div><div class="line"><span class="keyword">var</span> student2 = <span class="keyword">new</span> Student(<span class="string">"9924078"</span>);</div></pre></td></tr></table></figure>
+
+<p><strong>存在的问题：</strong></p>
+<ol>
+<li>多个对象实例不能共享方法，浪费内存；</li>
+<li>某个实例所做扩展无法被同类其他实例看到；</li>
+<li>构造函数也可以作为普通函数调用，如果在某个对象的作用域中，所有属性和方法被附加到该对象上，则默认会被附加到全局对象上，例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span><span class="params">(id)</span> </span>{</div><div class="line"><span class="keyword">this</span>.testid= id;</div><div class="line"><span class="keyword">this</span>.gettestId = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.testid; };</div><div class="line">}</div><div class="line">Student(<span class="string">"9924078"</span>);</div><div class="line"><span class="built_in">document</span>.write(<span class="string">"windon.testid is"</span> + <span class="built_in">window</span>.gettestId());      <span class="comment">//windon.testid is 9924078</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>如果函数中返回对象，新建对象将被赋值为该对象，而不是this对象，类型也就可能有问题 ，例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span><span class="params">(id)</span> </span>{</div><div class="line"><span class="keyword">this</span>.id= id;</div><div class="line"><span class="keyword">this</span>.getId = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.id; };</div><div class="line"><span class="keyword">return</span>{</div><div class="line">name: <span class="string">"9924078"</span>,</div><div class="line">getName : <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.name; }</div><div class="line">};</div><div class="line">}</div><div class="line">varstudent1 = <span class="keyword">new</span> Student(<span class="string">"9924077"</span>);</div><div class="line"><span class="built_in">document</span>.write(<span class="string">"student1.id is "</span>+ student1.id);      <span class="comment">//student1.id is undefined</span></div><div class="line"><span class="built_in">document</span>.write(<span class="string">"student1.name is"</span> + student1.getName());      <span class="comment">//student1.name is 9924078</span></div></pre></td></tr></table></figure>
+
+<h3 id="四、使用原型创建对象">四、使用原型创建对象</h3>
+<p>可以通过给对象的原型赋值方式来扩充对象属性和方法，并解决共享问题。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span><span class="params">()</span> </span>{ }</div><div class="line">Student.prototype.id = <span class="string">"9924077"</span>;</div><div class="line">Student.prototype.getId = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.id; };</div><div class="line"><span class="keyword">var</span> student1 = <span class="keyword">new</span> Student();</div><div class="line">student1.getId();</div></pre></td></tr></table></figure>
+
+<p><strong>特点：</strong></p>
+<ol>
+<li>随时可以通过原型方式来扩充既定类型，并即时影响该类型的所有对象实例；</li>
+<li>用构造函数生成的对象才能用原型方式扩充；</li>
+<li>可以在对象实例中定义同名属性覆盖原型中定义的属性，如：student1.id = “9924078”。</li>
+</ol>
+<p><strong>存在的问题：</strong></p>
+<ol>
+<li>灵活性不足：无法像构造函数一样通过传参来实现不同实例；</li>
+<li>多个对象实例需逐个覆盖原型属性，代码冗长；</li>
+<li>多个对象实例共享了同一个引用类型属性，例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Student.prototype.sclass = [ <span class="string">"web"</span>, <span class="string">"ICS"</span> ];</div><div class="line"><span class="keyword">var</span> student1 = <span class="keyword">new</span> Student();</div><div class="line"><span class="keyword">var</span> student2 = <span class="keyword">new</span> Student();</div><div class="line">student1.sclass.push(<span class="string">"DS"</span>);</div><div class="line">student2.sclass.push(<span class="string">"Java"</span>);</div><div class="line"><span class="built_in">document</span>.write(<span class="string">"student1.sclass is "</span> + student1.sclass + <span class="string">"&lt;br&gt;"</span>); <span class="comment">//student1.sclass is web,ICS,DS,Java</span></div><div class="line"><span class="built_in">document</span>.write(<span class="string">"student2.sclass is "</span> + student2.sclass + <span class="string">"&lt;br&gt;"</span>); <span class="comment">//student2.sclass is web,ICS,DS,Java</span></div></pre></td></tr></table></figure>
+
+<h3 id="五、组合使用构造函数和原型创建对象">五、组合使用构造函数和原型创建对象</h3>
+<p>通过构造函数方式定义各实例不同的属性，通过原型方式定义各实例共享的方法。这样还可通过传参生成不同对象，引用类型共享问题也不存在。如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span><span class="params">(id)</span> </span>{  <span class="keyword">this</span>.id = id;  }</div><div class="line">Student.prototype.getId = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{  <span class="keyword">return</span> <span class="keyword">this</span>.id;  };</div><div class="line"><span class="keyword">var</span> student1 = <span class="keyword">new</span> Student(<span class="string">"9924077"</span>);</div><div class="line"><span class="keyword">var</span> student2 = <span class="keyword">new</span> Student(<span class="string">"9924078"</span>);</div></pre></td></tr></table></figure>
+
+<p>对此方法改进后的动态原型模式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span><span class="params">(id)</span> </span>{</div><div class="line">    <span class="keyword">this</span>.id = id;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span>.getId != <span class="string">"function"</span>) {</div><div class="line">        Student.prototype.getId = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.id; };</div><div class="line">    }</div><div class="line">}</div><div class="line"><span class="keyword">var</span> student1 = <span class="keyword">new</span> Student(<span class="string">"9924077"</span>);</div><div class="line"><span class="keyword">var</span> student2 = <span class="keyword">new</span> Student(<span class="string">"9924078"</span>);</div></pre></td></tr></table></figure>
+
+<h3 id="六、深入创建对象">六、深入创建对象</h3>
+<p>new运算符时做了什么：</p>
+<ol>
+<li>创建原型对象，将其constructor属性指向函数对象（该操作只做一次）；</li>
+<li>将函数对象的prototype属性指向原型对象（该操作只做一次）；</li>
+<li>创建实例对象，将实例对象的<em>proto</em>属性指向原型对象，将this指针指向新建实例对象，返回this指针（如果构造函数不显式返回一个其他对象的话）。<br><img src="/2013/06/24/Javascript-Object/20130623120524187.jpg" alt=""><br>关于赋值：</li>
+<li>构造函数中使用this赋值时，依据这些语句为实例对象添加属性和方法。</li>
+<li>直接对原型赋值时，依据这些语句为原型对象添加属性和方法。</li>
+</ol>
+<h3 id="七、深入理解原型">七、深入理解原型</h3>
+<p>在使用原型方法创建对象时，为减少输入和加强封装，可以直接将对象字面量赋予原型，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span><span class="params">()</span> </span>{ }</div><div class="line">Student.prototype = {</div><div class="line">    id : <span class="string">"9924077"</span>,</div><div class="line">    getId : <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.id; }</div><div class="line">};</div><div class="line"><span class="keyword">var</span> student1 = <span class="keyword">new</span> Student();</div><div class="line">student1.getId();</div></pre></td></tr></table></figure>
+
+<p>此时id是原型的属性。但是存在一些问题：</p>
+<ol>
+<li>但此时原型的constructor值丢失，所以需要手动加上：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Student.prototype= {</div><div class="line">constructor: Student,</div><div class="line">id: <span class="string">"9924077"</span>,</div><div class="line">getId: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.id; }</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<ol>
+<li>字面量赋值前生成的实例对象与原型间关系被切断，但在所有实例生成前赋值则没有关系。例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span><span class="params">()</span> </span>{ }</div><div class="line">varstudent1 = <span class="keyword">new</span> Student();</div><div class="line">Student.prototype= {</div><div class="line">constructor: Student,</div><div class="line">id: <span class="string">"9924077"</span>,</div><div class="line">getId: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.id; }</div><div class="line">};</div><div class="line">student1.getId();<span class="comment">// error</span></div></pre></td></tr></table></figure>
+
+<p>此时的对象关系图如下：<br><img src="/2013/06/24/Javascript-Object/20130623120556921.jpg" alt=""><br>系统对对象属性和方法访问的判断：</p>
+<ol>
+<li>首先访问实例，看实例中是否有该属性；</li>
+<li>如果没有，则通过<em>proto</em>查看原型中是否有；</li>
+<li>如果再没有，查看原型的父类型的原型（涉及继承的原型链的问题）；</li>
+<li>只有访问对象时才会查找原型，赋值和删除时不查找原型；</li>
+<li>添加同名属性后会覆盖原型中属性，删除实例属性后可能会暴露出原型中同名属性；</li>
+<li>字面量方式定义的对象无法使用原型，因为没有使用new运算符的过程。</li>
+</ol>
+<h3 id="八、模拟类方法和类属性">八、模拟类方法和类属性</h3>
+<p>类方法和类属性是可以通过类名访问的，所有实例共享的方法和属性。相当于java中的static变量和方法。Javascript中可以通过构造函数对象实现，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span><span class="params">()</span> </span>{ }</div><div class="line">Student.TEST = <span class="number">1</span>;</div><div class="line">Student.GetTEST = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> Student.TEST; };</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Javascript/">Javascript</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2013/06/24/Javascript-Object/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

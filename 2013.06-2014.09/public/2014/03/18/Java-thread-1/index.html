@@ -1,0 +1,294 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java多线程(一) | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="一、基础概念
+1. 线程
+线程就是程序中单独顺序的流控制，它本身不能运行，只能用于程序中。（线程是程序内的顺序控制流，只能使用分配给程序的资源和环境）
+2. 进程
+执行中的程序。程序是静态的概念，进程是动态的概念。一个进程可以包含一个或多个线程（至少一个）。
+3. 线程与进程的区别
+
+多个进程的内部数据和状态都是完全独立的，而多线程是共享一块内存空间和一组系统资源，有可能互相影响。
+线程本身的数据通常只有寄存器数据，以及一个程序执行时使用的堆栈，所以线程的切换负担比进程切换的负担要小。
+多线程程序比多进程程序需要更少的管理费用。
+进程是重量级的任务，需要分配给它们独立的地址空间，进程间通信是昂贵和受限的，进程间的转换也是很需要花费的。
+线程是轻量级的，它们共享相同的地址空间并且共同分享同一个进程，线程间的通信是便宜的，线程间的转换也是低成本的。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Java多线程(一)"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-18T08:41:02.000Z"><a href="/2014/03/18/Java-thread-1/">Mar 18 2014</a></time>
+      
+      
+  
+    <h1 class="title">Java多线程(一)</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、基础概念">一、基础概念</h3>
+<h4 id="1-_线程">1. 线程</h4>
+<p>线程就是程序中单独顺序的流控制，它本身不能运行，只能用于程序中。（线程是程序内的顺序控制流，只能使用分配给程序的资源和环境）</p>
+<h4 id="2-_进程">2. 进程</h4>
+<p>执行中的程序。程序是静态的概念，进程是动态的概念。一个进程可以包含一个或多个线程（至少一个）。</p>
+<h4 id="3-_线程与进程的区别">3. 线程与进程的区别</h4>
+<ul>
+<li>多个进程的内部数据和状态都是完全独立的，而多线程是共享一块内存空间和一组系统资源，有可能互相影响。</li>
+<li>线程本身的数据通常只有寄存器数据，以及一个程序执行时使用的堆栈，所以线程的切换负担比进程切换的负担要小。</li>
+<li>多线程程序比多进程程序需要更少的管理费用。</li>
+<li>进程是重量级的任务，需要分配给它们独立的地址空间，进程间通信是昂贵和受限的，进程间的转换也是很需要花费的。</li>
+<li>线程是轻量级的，它们共享相同的地址空间并且共同分享同一个进程，线程间的通信是便宜的，线程间的转换也是低成本的。</li>
+</ul>
+<p><a id="more"></a></p>
+<h3 id="二、实现多线程">二、实现多线程</h3>
+<p>Java中实现多线程的方法有两种：</p>
+<p>1.继承Thread类并且覆盖父类的run方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>{</div><div class="line">    <span class="keyword">private</span> String message;</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> <span class="title">ThreadDemo</span>(String message) {</div><div class="line">        <span class="keyword">this</span>.message = message;</div><div class="line">    }</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>() {</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)</div><div class="line">            System.out.println(<span class="keyword">this</span>.message);</div><div class="line">    }</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(String[] args) {</div><div class="line">        <span class="keyword">new</span> ThreadDemo(<span class="string">"A new thread"</span>).start();</div><div class="line">        <span class="keyword">new</span> ThreadDemo(<span class="string">"Another new thread"</span>).start();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>但是这种发发会出现一些问题，例如有些时候一个类已经继承了别的类，那么就无法再继承Thread了；另外这种方法将任务和运行任务的机制混合在一起了。一般情况下，将任务从线程中分离出来是更好地设计，即第二种方法。</p>
+<p>2.实现Runnable接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Task</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{</div><div class="line">    <span class="keyword">private</span> String message;</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> <span class="title">Task</span>(String message) {</div><div class="line">        <span class="keyword">this</span>.message = message;</div><div class="line">    }</div><div class="line"> </div><div class="line">    <span class="annotation">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>() {</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)</div><div class="line">            System.out.println(message);</div><div class="line">    }</div><div class="line"> </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(String[] args) {</div><div class="line">        Task task1 = <span class="keyword">new</span> Task(<span class="string">"A new task"</span>);</div><div class="line">        Task task2 = <span class="keyword">new</span> Task(<span class="string">"Another new task"</span>);</div><div class="line"> </div><div class="line">        <span class="keyword">new</span> Thread(task1).start();</div><div class="line">        <span class="keyword">new</span> Thread(task2).start();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>要特别注意的是无论使用哪种方法，启动线程的时候都是调用start方法而不是run方法。</p>
+<h3 id="三、线程的状态">三、线程的状态</h3>
+<p><img src="/2014/03/18/Java-thread-1/java_thread_state.jpg" alt=""></p>
+<h4 id="1-创建状态">1.创建状态</h4>
+<p>当用new操作符创建一个新的线程对象时，该线程处于创建状态。处于创建状态的线程只是一个空的线程对象，系统不为它分配资源。</p>
+<h4 id="2-可运行状态">2.可运行状态</h4>
+<p>执行线程的start()方法将为线程分配必须的系统资源，安排其运行，并调用run()方法，这样就使得该线程处于可运行状态(runnable)，这一状态并不是运行中状态(running)，因为线程也许实际上并未真正运行。</p>
+<h4 id="3-不可运行状态">3.不可运行状态</h4>
+<p>当发生下列事件时，处于运行状态的线程会转入到不可运行状态：</p>
+<ul>
+<li>调用了sleep()方法</li>
+<li>线程调用wait()方法等待特定条件的满足</li>
+<li>线程输入/输出阻塞</li>
+</ul>
+<p>返回可运行状态：</p>
+<ul>
+<li>处于睡眠状态的线程在指定的时间过去后</li>
+<li>如果线程在等待某一条件，另一个对象必须通过notify()或notifyAll()方法通知等待线程条件的改变</li>
+<li>如果线程是因为输入输出阻塞，等待输入输出完成</li>
+</ul>
+<h4 id="4-消亡状态">4.消亡状态</h4>
+<p>当线程的run()方法执行结束后，该线程自然消亡。</p>
+<h3 id="四、线程的优先级">四、线程的优先级</h3>
+<ol>
+<li>优先级是1到10的整数</li>
+<li>默认情况下，线程继承其父线程的优先级</li>
+<li>可通过setPriority改变优先级，getPriority获取优先级</li>
+<li>三个常量：Thread.MIN_PRIORITY(1), Thread.NORMAL_PRIORITY(5, default), Thread.MAX_PRIORITY(10)</li>
+</ol>
+<p>通常情况下，低优先级的线程只有在没有高优先级的线程运行时才能运行，当多个线程优先级相同时，采用轮转方式。但是，当出现以下情况时，线程也会停止：</p>
+<ol>
+<li>线程体中调用了yield()方法，让出了对CPU的占用权，相当于该线程的时间片用完；</li>
+<li>线程体中调用了sleep()方法，使线程进入睡眠状态；</li>
+<li>线程由于I/O操作而受阻塞；</li>
+<li>另一个更高优先级的线程出现；</li>
+<li>在支持时间片的系统中，该线程的时间片用完。</li>
+</ol>
+<h3 id="参考文章">参考文章</h3>
+<p><a href="http://www.cnblogs.com/mengdd/archive/2013/02/16/2913628.html" target="_blank" rel="external">多线程Multi-Thread 基础</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Java/">Java</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2014/03/18/Java-thread-1/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

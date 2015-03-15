@@ -1,0 +1,622 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Javascript | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title category">Javascript</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-09-14T05:00:32.000Z"><a href="/2014/09/14/jQuery-plugin-multiscroll/">Sep 14 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近发现了一个不错的多页面滚动插件 <a href="https://github.com/alvarotrigo/multiscroll.js" target="_blank" rel="external">multiscroll</a>，之前jQuery也没少用，但是都是一些常用的功能，对jQuery的理解并不算深刻，而且对于jQuery插件的开发也没有涉及过。因此借助这个插件，顺便了解一下jQuery的一些未曾接触过的API函数。</p>
+<p>通过看源码可以得知整个multiscroll函数接受一个options的参数，然后是将options扩展到默认的参数选项，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">options = $.extend({</div><div class="line">	<span class="string">'verticalCentered'</span> : <span class="literal">true</span>,</div><div class="line">	<span class="string">'scrollingSpeed'</span>: <span class="number">700</span>,</div><div class="line">	<span class="string">'easing'</span>: <span class="string">'easeInQuart'</span>,</div><div class="line">	<span class="string">'menu'</span>: <span class="literal">false</span>,</div><div class="line">	<span class="comment">// ... ...</span></div><div class="line">}, options);</div></pre></td></tr></table></figure>
+
+<p>这里先来了解一下<code>$.extend</code>函数，可参考<a href="http://api.jquery.com/jQuery.extend/" target="_blank" rel="external">官方API</a>，因此这里第一个参数是定义的默认选项，传入的参数options是用户定义的选项，所以就是用用户的选项覆盖掉默认的选项。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/09/14/jQuery-plugin-multiscroll/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-07-13T05:56:23.000Z"><a href="/2014/07/13/Javascript-coding-standards/">Jul 13 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/07/13/Javascript-coding-standards/">Javascript编码规范</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="https://github.com/airbnb/javascript" target="_blank" rel="external">https://github.com/airbnb/javascript</a><br><a href="http://alloyteam.github.io/JX/doc/specification/google-javascript.xml" target="_blank" rel="external">http://alloyteam.github.io/JX/doc/specification/google-javascript.xml</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-07-11T05:58:16.000Z"><a href="/2014/07/11/Javascript-array-operations/">Jul 11 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/07/11/Javascript-array-operations/">Javascript数组操作</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="1-_forEach遍历数组">1. forEach遍历数组</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</div><div class="line">arr.forEach(<span class="function"><span class="keyword">function</span><span class="params">(x)</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log(x);</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<h3 id="2-_filter过滤数组">2. filter过滤数组</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</div><div class="line"><span class="keyword">var</span> newArr = arr.filter(<span class="function"><span class="keyword">function</span><span class="params">(x)</span> </span>{</div><div class="line">    <span class="keyword">return</span> x % <span class="number">2</span> == <span class="number">0</span>;</div><div class="line">});</div><div class="line"><span class="built_in">console</span>.log(newArr);</div></pre></td></tr></table></figure>
+
+<h3 id="3-_map对数组每一项执行函数，结果作为新数组返回">3. map对数组每一项执行函数，结果作为新数组返回</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</div><div class="line"><span class="keyword">var</span> newArr = arr.map(<span class="function"><span class="keyword">function</span><span class="params">(x)</span> </span>{</div><div class="line">    <span class="keyword">return</span> x * x;</div><div class="line">});</div><div class="line"><span class="built_in">console</span>.log(newArr);</div></pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/07/11/Javascript-array-operations/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-05-20T06:03:32.000Z"><a href="/2014/05/20/jsonp-cross-domain/">May 20 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/05/20/jsonp-cross-domain/">jsonp跨域访问</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在介绍jsonp之前，需要先了解一下<a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy" target="_blank" rel="external">同源策略</a>。同源指的是主机、端口和协议都相同。同源策略阻止从一个源加载的文档或脚本获取或设置另一个源加载的文档的属性。下面是一个简单示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    $.ajax({</div><div class="line">        url: <span class="string">'http://weather.yahooapis.com/forecastrss'</span>,</div><div class="line">        type: <span class="string">'GET'</span>,</div><div class="line">        dataType: <span class="string">'xml'</span>,</div><div class="line">        data: {</div><div class="line">            w: <span class="string">'2151849'</span>,</div><div class="line">            u: <span class="string">'c'</span></div><div class="line">        },</div><div class="line">        success: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'success'</span>);</div><div class="line">        },</div><div class="line">        error: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'fail'</span>);</div><div class="line">        }</div><div class="line">    });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>这里是向Yahoo天气发送一个ajax请求来获取上海的天气数据，由于同源策略，会提示如下错误：</p>
+<blockquote>
+<p>XMLHttpRequest cannot load <a href="http://weather.yahooapis.com/forecastrss?w=2151849&amp;u=c" target="_blank" rel="external">http://weather.yahooapis.com/forecastrss?w=2151849&amp;u=c</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘null’ is therefore not allowed access.</p>
+</blockquote>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/05/20/jsonp-cross-domain/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-29T06:10:13.000Z"><a href="/2013/06/29/Javascript-buildin-objects/">Jun 29 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/29/Javascript-buildin-objects/">javascript内建对象</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、Object类型">一、Object类型</h3>
+<p>JavaScript中所有对象都继承自Object类型，对象字面量属于Object类型。Object类型拥有一些基本的属性和方法：</p>
+<ol>
+<li>constructor属性：指向初始化对象的构造函数；</li>
+<li>toString方法：对象向字符串转换时调用的方法；</li>
+<li>valueOf方法：对象向基本数据类型转换时调用的方法，未必转换为数字；</li>
+<li>hasOwnProperty方法和isProprotypeOf方法。</li>
+</ol>
+<h3 id="二、基本包装类型Boolean、Number和String">二、基本包装类型Boolean、Number和String</h3>
+<ol>
+<li>可以通过new运算符生成包装类型的实例；</li>
+<li>typeof运算结果为object；</li>
+<li>有相应的属性和方法可以调用；</li>
+<li>一般不建议使用Boolean和Number实例；</li>
+<li>系统会隐含地进行String基本类型和包装类型的转换，所以总体而言一般没有必要特别注意基本类型和包装类型。</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/29/Javascript-buildin-objects/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-27T06:15:53.000Z"><a href="/2013/06/27/Javascript-Object-operations/">Jun 27 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/27/Javascript-Object-operations/">Javascript对象和属性操作</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、判断对象属于哪个基本类型：typeof运算符">一、判断对象属于哪个基本类型：typeof运算符</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span> x <span class="keyword">is</span> undefined</div><div class="line"><span class="keyword">typeof</span> <span class="keyword">true</span> <span class="keyword">is</span> boolean</div><div class="line"><span class="keyword">typeof</span> <span class="string">'Jerry'</span> <span class="keyword">is</span> <span class="keyword">string</span></div><div class="line"><span class="keyword">typeof</span> <span class="number">2</span> <span class="keyword">is</span> number</div><div class="line"><span class="keyword">typeof</span> instance <span class="keyword">is</span> <span class="keyword">object</span></div><div class="line"><span class="keyword">typeof</span> <span class="keyword">null</span> <span class="keyword">is</span> <span class="keyword">object</span></div><div class="line"><span class="keyword">typeof</span> SuperType <span class="keyword">is</span> function</div></pre></td></tr></table></figure>
+
+<h3 id="二、判断对象是否是某个类型的实例：instanceof运算符">二、判断对象是否是某个类型的实例：instanceof运算符</h3>
+<p>某个实例是其继承原型链上所有原型类型的实例，注意如果是借用构造函数的继承，那么子类的实例不是父类的实例，因为在这种情况下，仅仅是在子类实例中声明了父类的属性，因此事实上没有产生继承关系。</p>
+<h3 id="三、判断对象是否是某个实例的原型：isPrototypeOf()函数">三、判断对象是否是某个实例的原型：isPrototypeOf()函数</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = {};</div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf(o); <span class="comment">// true</span></div><div class="line"><span class="built_in">Object</span>.isPrototypeOf(o); <span class="comment">// false</span></div><div class="line">o.isPrototypeOf(<span class="built_in">Object</span>); <span class="comment">// false</span></div><div class="line">Fucntion.prototype.isPrototypeOf(<span class="built_in">Object</span>); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/27/Javascript-Object-operations/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-26T06:21:42.000Z"><a href="/2013/06/26/Javascript-inherit/">Jun 26 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/26/Javascript-inherit/">Javascript继承机制</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、原型链继承">一、原型链继承</h3>
+<p>本质是将子类的原型设为父类的实例，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">this</span>.property = <span class="literal">true</span>;</div><div class="line">}</div><div class="line"> </div><div class="line">SuperType.prototype.getSuperValue = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.property;</div><div class="line">};</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">this</span>.subproperty = <span class="literal">false</span>;</div><div class="line">}</div><div class="line"> </div><div class="line">SubType.prototype = <span class="keyword">new</span> SuperType();</div><div class="line">SubType.prototype.getSubValue = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.subproperty;</div><div class="line">};</div><div class="line"> </div><div class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> SubType();</div></pre></td></tr></table></figure>
+
+<p>对象关系图如下：<br><img src="/2013/06/26/Javascript-inherit/20130623120754609.jpg" alt=""></p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>JavaScript中所有对象都继承自Object对象类型；</li>
+<li>为子类添加子类特有方法要在原型替换语句后，即要先声明子类的原型为父类的实例，然后为子类添加其特有的方法；</li>
+<li>可以在子类原型中覆盖父类方法，因为子类原型本来就是父类原型的实例，参考实例和原型关系即可理解；</li>
+<li>某种意义上前面讲的实例和原型就是一次继承关系，而这里的父类和子类是多次继承关系。</li>
+</ol>
+<p><strong>存在的问题：</strong></p>
+<ol>
+<li>父类中的实例属性会成为子类的原型属性；</li>
+<li>无法在不影响所有子类实例情况下向父类构造函数传参。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/26/Javascript-inherit/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-24T06:30:05.000Z"><a href="/2013/06/24/Javascript-Object/">Jun 24 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/24/Javascript-Object/">Javascript对象</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、对象字面量来定义对象">一、对象字面量来定义对象</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> student = {</div><div class="line">    id : <span class="string">"9924077"</span>,</div><div class="line">    name : <span class="string">"test"</span>,</div><div class="line">    sclass : [ <span class="string">"web"</span>, <span class="string">"java"</span> ],</div><div class="line">    test : { x : <span class="number">1</span>,  y : <span class="number">1</span> },</div><div class="line">    getId : <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.id; }</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>{}中属性名值对，名值间用冒号分开，彼此间用逗号分开</li>
+<li>如果属性名不是合法标识符，则需用 ” “括住，如”first-name”: “zhu”</li>
+<li>值可以是变量，可以是对象，方法可以认为是特殊的属性</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>多个对象实例需逐个定义，代码冗长；</li>
+<li>多个对象实例不能共享方法，浪费内存；</li>
+<li>无法识别对象实例的类型；</li>
+<li>无法体现对象实例间关系。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/24/Javascript-Object/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-23T06:48:51.000Z"><a href="/2013/06/23/Javascript-Array/">Jun 23 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/23/Javascript-Array/">Javascript数组</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、数组特点">一、数组特点</h3>
+<ol>
+<li>JavaScript中的数组不是一段连续内存集合，而是拥有类数组特性的对象</li>
+<li>JavaScript中的数组可以混合存储任意类型的数据</li>
+<li>JavaScript中的数组大小可动态变化</li>
+<li>JavaScript中的数组是稀疏数组，亦即下标不必是连续的，但仅有真正存储的内容获得内存空间</li>
+</ol>
+<p>二、数组的创建</p>
+<ol>
+<li>单纯创建数组：var arr=new Array();</li>
+<li>创建数组的同时规定数组大小：var arr=new Array(10);</li>
+<li>直接初始化：var arr=new Array(“love”,”hate”,”pain”); 或 var arr=[“happy”,”cute”,”scare”];</li>
+<li>多维数组：var matrix = [ [1,2,3], [4,5,6], [7,8,9] ]; window.alert(matrix[2][1]);
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/23/Javascript-Array/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-23T06:48:40.000Z"><a href="/2013/06/23/Javascript-Function/">Jun 23 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/23/Javascript-Function/">Javascript函数</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、函数的定义">一、函数的定义</h3>
+<ol>
+<li>显式函数，例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(a, b)</span> </span>{</div><div class="line">	<span class="keyword">return</span> a + b;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<ol>
+<li>使用Function作为对象的构造函数，把参数列表和函数体都作为字符串。可以接受任意多个参数，最后一个为函数体；如果只有一个参数，则为函数体。例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> add = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"return a+b;"</span>);</div></pre></td></tr></table></figure>
+
+<ol>
+<li>匿名构造函数，例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> </span>{</div><div class="line">	<span class="keyword">return</span> a + b;</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>这种情况下可以加上默认参数，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> result = (<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> </span>{</div><div class="line">	<span class="keyword">return</span> a + b;</div><div class="line">})(<span class="number">3</span>,<span class="number">4</span>);</div></pre></td></tr></table></figure>
+
+<p>而且此时函数可以有另外的名字，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span> <span class="title">addNum</span><span class="params">(a, b)</span> </span>{</div><div class="line">	<span class="keyword">return</span> a + b;</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/23/Javascript-Function/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

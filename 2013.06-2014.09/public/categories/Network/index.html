@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Network | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title category">Network</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-13T17:46:38.000Z"><a href="/2014/04/14/difference-between-get-and-post/">Apr 14 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/14/difference-between-get-and-post/">GET和POST的区别</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="1-_生成方式不同">1. 生成方式不同</h3>
+<p>GET的主要生成方式有：在地址栏输入URL；超链接；表单中的method属性为get或者为空。而POST的主要生成方式为表单中的method属性为post。当然了，GET和POST都可以通过Ajax来发送。</p>
+<h3 id="2-_数据传输方式不同">2. 数据传输方式不同</h3>
+<p>GET的参数会附在URL地址后面，所以GET方式提交时HTTP没有消息体。而POST方式参数会在HTTP的消息体中以实体的方式发送到服务器。另外GET方式提交表单时数据会自动进行编码处理，而POST方式则不会。</p>
+<h3 id="3-_传输的数据量">3. 传输的数据量</h3>
+<p>GET一般发送的数据量较小，数据有长度限制，当然这些限制一般是客户端和服务器来进行限制的，不是协议的限制。而POST适合大规模的数据传送，理论上没有数据大小限制。<br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/04/14/difference-between-get-and-post/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-01T02:51:22.000Z"><a href="/2014/04/01/HTTP-protocol/">Apr 1 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/01/HTTP-protocol/">HTTP 协议</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="一、HTTP请求">一、HTTP请求</h2>
+<h3 id="1-_请求行">1. 请求行</h3>
+<p>格式：Method Request-URI HTTP-Version CRLF<br>Method为请求方法，Request-URI为请求地址，HTTP-Version为HTTP协议版本，常用为HTTP/1.1，CRLF表示回车换行。请求方法如下：<br><strong>GET：</strong>请求获取Request-URI所标识的资源<br><strong>POST：</strong>在Request-URI所标识的资源后附加新的数据<br><strong>HEAD：</strong>请求获取由Request-URI所标识的资源的响应消息报头<br><strong>PUT：</strong>请求服务器存储一个资源，并用Request-URI作为其标识<br><strong>DELETE：</strong>请求服务器删除Request-URI所标识的资源<br><strong>TRACE：</strong>请求服务器回送收到的请求信息，主要用于测试或诊断<br><strong>CONNECT：</strong>保留将来使用<br><strong>OPTIONS：</strong>请求查询服务器的性能，或者查询与资源相关的选项和需求</p>
+<h2 id="二、HTTP响应">二、HTTP响应</h2>
+<p>HTTP响应也是由三个部分组成，分别为：状态行、消息报头、响应正文。</p>
+<h3 id="1-_状态行">1. 状态行</h3>
+<p>格式：HTTP-Version Status-Code Reason-Phrase CRLF<br>HTTP-Version表示服务器HTTP协议的版本，通常为HTTP/1.1，Status-Code表示服务器发回的响应状态代码，Reason-Phrase表示状态代码的文本描述。状态代码有三位数字组成，第一个数字定义了响应的类别，且有五种可能取值：<br><strong>1xx：</strong>指示信息–表示请求已接收，继续处理<br><strong>2xx：</strong>成功–表示请求已被成功接收、理解、接受<br><strong>3xx：</strong>重定向–要完成请求必须进行更进一步的操作<br><strong>4xx：</strong>客户端错误–请求有语法错误或请求无法实现<br><strong>5xx：</strong>服务器端错误–服务器未能实现合法的请求<br>具体的状态码、状态描述及说明参考<a href="http://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81" target="_blank" rel="external">wiki</a><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/04/01/HTTP-protocol/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

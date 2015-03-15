@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 5 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-24T06:30:05.000Z"><a href="/2013/06/24/Javascript-Object/">Jun 24 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/24/Javascript-Object/">Javascript对象</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、对象字面量来定义对象">一、对象字面量来定义对象</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> student = {</div><div class="line">    id : <span class="string">"9924077"</span>,</div><div class="line">    name : <span class="string">"test"</span>,</div><div class="line">    sclass : [ <span class="string">"web"</span>, <span class="string">"java"</span> ],</div><div class="line">    test : { x : <span class="number">1</span>,  y : <span class="number">1</span> },</div><div class="line">    getId : <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.id; }</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>{}中属性名值对，名值间用冒号分开，彼此间用逗号分开</li>
+<li>如果属性名不是合法标识符，则需用 ” “括住，如”first-name”: “zhu”</li>
+<li>值可以是变量，可以是对象，方法可以认为是特殊的属性</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>多个对象实例需逐个定义，代码冗长；</li>
+<li>多个对象实例不能共享方法，浪费内存；</li>
+<li>无法识别对象实例的类型；</li>
+<li>无法体现对象实例间关系。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/24/Javascript-Object/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-23T06:48:51.000Z"><a href="/2013/06/23/Javascript-Array/">Jun 23 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/23/Javascript-Array/">Javascript数组</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、数组特点">一、数组特点</h3>
+<ol>
+<li>JavaScript中的数组不是一段连续内存集合，而是拥有类数组特性的对象</li>
+<li>JavaScript中的数组可以混合存储任意类型的数据</li>
+<li>JavaScript中的数组大小可动态变化</li>
+<li>JavaScript中的数组是稀疏数组，亦即下标不必是连续的，但仅有真正存储的内容获得内存空间</li>
+</ol>
+<p>二、数组的创建</p>
+<ol>
+<li>单纯创建数组：var arr=new Array();</li>
+<li>创建数组的同时规定数组大小：var arr=new Array(10);</li>
+<li>直接初始化：var arr=new Array(“love”,”hate”,”pain”); 或 var arr=[“happy”,”cute”,”scare”];</li>
+<li>多维数组：var matrix = [ [1,2,3], [4,5,6], [7,8,9] ]; window.alert(matrix[2][1]);
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/23/Javascript-Array/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-23T06:48:40.000Z"><a href="/2013/06/23/Javascript-Function/">Jun 23 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/23/Javascript-Function/">Javascript函数</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、函数的定义">一、函数的定义</h3>
+<ol>
+<li>显式函数，例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(a, b)</span> </span>{</div><div class="line">	<span class="keyword">return</span> a + b;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<ol>
+<li>使用Function作为对象的构造函数，把参数列表和函数体都作为字符串。可以接受任意多个参数，最后一个为函数体；如果只有一个参数，则为函数体。例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> add = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"return a+b;"</span>);</div></pre></td></tr></table></figure>
+
+<ol>
+<li>匿名构造函数，例如：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> </span>{</div><div class="line">	<span class="keyword">return</span> a + b;</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>这种情况下可以加上默认参数，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> result = (<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> </span>{</div><div class="line">	<span class="keyword">return</span> a + b;</div><div class="line">})(<span class="number">3</span>,<span class="number">4</span>);</div></pre></td></tr></table></figure>
+
+<p>而且此时函数可以有另外的名字，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span> <span class="title">addNum</span><span class="params">(a, b)</span> </span>{</div><div class="line">	<span class="keyword">return</span> a + b;</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/23/Javascript-Function/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/4/" class="alignleft prev">Prev</a>
+  
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

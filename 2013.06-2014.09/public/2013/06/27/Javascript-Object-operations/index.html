@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Javascript对象和属性操作 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="一、判断对象属于哪个基本类型：typeof运算符
+1234567typeof x is undefinedtypeof true is booleantypeof &#39;Jerry&#39; is stringtypeof 2 is numbertypeof instance is objecttypeof null is objecttypeof SuperType is function
+
+二、判断对象是否是某个类型的实例：instanceof运算符
+某个实例是其继承原型链上所有原型类型的实例，注意如果是借用构造函数的继承，那么子类的实例不是父类的实例，因为在这种情况下，仅仅是在子类实例中声明了父类的属性，因此事实上没有产生继承关系。
+三、判断对象是否是某个实例的原型：isPrototypeOf()函数
+12345var o = {};Object.prototype.isPrototypeOf(o); // trueObject.isPrototypeOf(o); // falseo.isPrototypeOf(Object); // falseFucntion.prototype.isPrototypeOf(Object); // true">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Javascript对象和属性操作"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-27T06:15:53.000Z"><a href="/2013/06/27/Javascript-Object-operations/">Jun 27 2013</a></time>
+      
+      
+  
+    <h1 class="title">Javascript对象和属性操作</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、判断对象属于哪个基本类型：typeof运算符">一、判断对象属于哪个基本类型：typeof运算符</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span> x <span class="keyword">is</span> undefined</div><div class="line"><span class="keyword">typeof</span> <span class="keyword">true</span> <span class="keyword">is</span> boolean</div><div class="line"><span class="keyword">typeof</span> <span class="string">'Jerry'</span> <span class="keyword">is</span> <span class="keyword">string</span></div><div class="line"><span class="keyword">typeof</span> <span class="number">2</span> <span class="keyword">is</span> number</div><div class="line"><span class="keyword">typeof</span> instance <span class="keyword">is</span> <span class="keyword">object</span></div><div class="line"><span class="keyword">typeof</span> <span class="keyword">null</span> <span class="keyword">is</span> <span class="keyword">object</span></div><div class="line"><span class="keyword">typeof</span> SuperType <span class="keyword">is</span> function</div></pre></td></tr></table></figure>
+
+<h3 id="二、判断对象是否是某个类型的实例：instanceof运算符">二、判断对象是否是某个类型的实例：instanceof运算符</h3>
+<p>某个实例是其继承原型链上所有原型类型的实例，注意如果是借用构造函数的继承，那么子类的实例不是父类的实例，因为在这种情况下，仅仅是在子类实例中声明了父类的属性，因此事实上没有产生继承关系。</p>
+<h3 id="三、判断对象是否是某个实例的原型：isPrototypeOf()函数">三、判断对象是否是某个实例的原型：isPrototypeOf()函数</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = {};</div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf(o); <span class="comment">// true</span></div><div class="line"><span class="built_in">Object</span>.isPrototypeOf(o); <span class="comment">// false</span></div><div class="line">o.isPrototypeOf(<span class="built_in">Object</span>); <span class="comment">// false</span></div><div class="line">Fucntion.prototype.isPrototypeOf(<span class="built_in">Object</span>); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">SubType.prototype.isPrototypeOf(instance); <span class="comment">// true</span></div><div class="line">SuperType.prototype.isPrototypeOf(instance); <span class="comment">// true</span></div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf(instance); <span class="comment">// true</span></div><div class="line">SubType.isPrototypeOf(instance); <span class="comment">// false</span></div></pre></td></tr></table></figure>
+
+<h3 id="四、判断某个属性是否从属于某个对象：in运算符">四、判断某个属性是否从属于某个对象：in运算符</h3>
+<ol>
+<li>只判断某个对象是否可以使用某个属性，并不辨别该属性是从原型继承来的还是实例自身属性；</li>
+<li>in运算符的左侧需是字符串或可转为字符串。</li>
+</ol>
+<h3 id="五、判断某个属性是否属于某个对象的实例属性：hasOwnProperty()方法">五、判断某个属性是否属于某个对象的实例属性：hasOwnProperty()方法</h3>
+<p>只判断某个对象是否可以使用某个属性，且该属性属于实例自身属性，不是从原型继承所得。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Javascript/">Javascript</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2013/06/27/Javascript-Object-operations/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

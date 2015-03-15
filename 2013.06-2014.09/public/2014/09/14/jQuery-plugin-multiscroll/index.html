@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jQuery插件multiscroll研究 | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="最近发现了一个不错的多页面滚动插件 multiscroll，之前jQuery也没少用，但是都是一些常用的功能，对jQuery的理解并不算深刻，而且对于jQuery插件的开发也没有涉及过。因此借助这个插件，顺便了解一下jQuery的一些未曾接触过的API函数。
+通过看源码可以得知整个multiscroll函数接受一个options的参数，然后是将options扩展到默认的参数选项，代码如下：
+1234567options = $.extend({	&#39;verticalCentered&#39; : true,	&#39;scrollingSpeed&#39;: 700,	&#39;easing&#39;: &#39;easeInQuart&#39;,	&#39;menu&#39;: false,	// ... ...}, options);
+
+这里先来了解一下$.extend函数，可参考官方API，因此这里第一个参数是定义的默认选项，传入的参数options是用户定义的选项，所以就是用用户的选项覆盖掉默认的选项。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="jQuery插件multiscroll研究"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-09-14T05:00:32.000Z"><a href="/2014/09/14/jQuery-plugin-multiscroll/">Sep 14 2014</a></time>
+      
+      
+  
+    <h1 class="title">jQuery插件multiscroll研究</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近发现了一个不错的多页面滚动插件 <a href="https://github.com/alvarotrigo/multiscroll.js" target="_blank" rel="external">multiscroll</a>，之前jQuery也没少用，但是都是一些常用的功能，对jQuery的理解并不算深刻，而且对于jQuery插件的开发也没有涉及过。因此借助这个插件，顺便了解一下jQuery的一些未曾接触过的API函数。</p>
+<p>通过看源码可以得知整个multiscroll函数接受一个options的参数，然后是将options扩展到默认的参数选项，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">options = $.extend({</div><div class="line">	<span class="string">'verticalCentered'</span> : <span class="literal">true</span>,</div><div class="line">	<span class="string">'scrollingSpeed'</span>: <span class="number">700</span>,</div><div class="line">	<span class="string">'easing'</span>: <span class="string">'easeInQuart'</span>,</div><div class="line">	<span class="string">'menu'</span>: <span class="literal">false</span>,</div><div class="line">	<span class="comment">// ... ...</span></div><div class="line">}, options);</div></pre></td></tr></table></figure>
+
+<p>这里先来了解一下<code>$.extend</code>函数，可参考<a href="http://api.jquery.com/jQuery.extend/" target="_blank" rel="external">官方API</a>，因此这里第一个参数是定义的默认选项，传入的参数options是用户定义的选项，所以就是用用户的选项覆盖掉默认的选项。</p>
+<a id="more"></a>
+
+<p>接下来是一些变量的定义：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> scrollDelay = <span class="number">600</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> isTouch = ((<span class="string">'ontouchstart'</span> <span class="keyword">in</span> <span class="built_in">window</span>) || (navigator.msMaxTouchPoints &gt; <span class="number">0</span>));</div><div class="line"><span class="keyword">var</span> numberSections = $(<span class="string">'.ms-left'</span>).find(<span class="string">'.ms-section'</span>).length;</div><div class="line"><span class="keyword">var</span> isMoving = <span class="literal">false</span>;</div><div class="line"><span class="keyword">var</span> nav;</div><div class="line"><span class="keyword">var</span> windowHeight = $(<span class="built_in">window</span>).height();</div></pre></td></tr></table></figure>
+
+<p>然后是添加鼠标滚轮事件和触摸事件，其中鼠标滚轮事件如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* Adds the auto scrolling action for the mouse wheel and tackpad.</div><div class="line">* After this function is called, the mousewheel and trackpad movements will scroll through sections</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addMouseWheelHandler</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">if</span> (<span class="built_in">document</span>.addEventListener) {</div><div class="line">		<span class="built_in">document</span>.addEventListener(<span class="string">"mousewheel"</span>, MouseWheelHandler, <span class="literal">false</span>); <span class="comment">//IE9, Chrome, Safari, Oper</span></div><div class="line">		<span class="built_in">document</span>.addEventListener(<span class="string">"wheel"</span>, MouseWheelHandler, <span class="literal">false</span>); <span class="comment">//Firefox</span></div><div class="line">	} <span class="keyword">else</span> {</div><div class="line">		<span class="built_in">document</span>.attachEvent(<span class="string">"onmousewheel"</span>, MouseWheelHandler); <span class="comment">//IE 6/7/8</span></div><div class="line">	}</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Detecting mousewheel scrolling</div><div class="line"> *</div><div class="line"> * http://blogs.sitepointstatic.com/examples/tech/mouse-wheel/index.html</div><div class="line"> * http://www.sitepoint.com/html5-javascript-mouse-wheel/</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">MouseWheelHandler</span><span class="params">(e)</span> </span>{</div><div class="line">	<span class="comment">// cross-browser wheel delta</span></div><div class="line">	e = <span class="built_in">window</span>.event || e;</div><div class="line">	<span class="keyword">var</span> delta = <span class="built_in">Math</span>.max(-<span class="number">1</span>, <span class="built_in">Math</span>.min(<span class="number">1</span>, (e.wheelDelta || -e.deltaY || -e.detail)));</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (!isMoving) { <span class="comment">//if theres any #</span></div><div class="line"></div><div class="line">		<span class="comment">//scrolling down?</span></div><div class="line">		<span class="keyword">if</span> (delta &lt; <span class="number">0</span>) {</div><div class="line">			$.fn.multiscroll.moveSectionDown();</div><div class="line">		}</div><div class="line"></div><div class="line">		<span class="comment">//scrolling up?</span></div><div class="line">		<span class="keyword">else</span> {</div><div class="line">			$.fn.multiscroll.moveSectionUp();</div><div class="line">		}</div><div class="line">	}</div><div class="line"></div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>源码注释里已经有了参考链接，由于e.detail是Firefox支持的，且当滚轮向下滚动时返回正值，因此需要加上负号。使用Math.min取保当滚轮向上滚动时返回1，向下滚动时返回一个负值，外面再加一层Math.max从而保证滚轮向上滚动时delta为1，滚轮向下滚动时delta值为-1，接下来根据delta值得正负从而向上或者向下滚动页面。</p>
+<p>触摸事件如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> touchStartY = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> touchStartX = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> touchEndY = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> touchEndX = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Adds the possibility to auto scroll through sections on touch devices.</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addTouchHandler</span><span class="params">()</span> </span>{</div><div class="line">	<span class="keyword">if</span> (isTouch) {</div><div class="line">		$(<span class="built_in">document</span>).off(<span class="string">'touchstart MSPointerDown'</span>).on(<span class="string">'touchstart MSPointerDown'</span>, touchStartHandler);</div><div class="line">		$(<span class="built_in">document</span>).off(<span class="string">'touchmove MSPointerMove'</span>).on(<span class="string">'touchmove MSPointerMove'</span>, touchMoveHandler);</div><div class="line">	}</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Handler to get he coordinates of the starting touch</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">touchStartHandler</span><span class="params">(event)</span> </span>{</div><div class="line">	<span class="keyword">var</span> e = event.originalEvent;</div><div class="line">	<span class="keyword">var</span> touchEvents = getEventsPage(e);</div><div class="line">	touchStartY = touchEvents[<span class="string">'y'</span>];</div><div class="line">	touchStartX = touchEvents[<span class="string">'x'</span>];</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/* Detecting touch events</span></div><div class="line"> </div><div class="line"> * As we are changing the top property of the page on scrolling, we can not use the traditional way to detect it.</div><div class="line"> * This way, the touchstart and the touch moves shows an small difference between them which is the</div><div class="line"> * used one to determine the direction.</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">touchMoveHandler</span><span class="params">(event)</span> </span>{</div><div class="line">	<span class="keyword">var</span> e = event.originalEvent;</div><div class="line"></div><div class="line">	<span class="comment">//preventing the easing on iOS devices</span></div><div class="line">	event.preventDefault();</div><div class="line"></div><div class="line">	<span class="keyword">var</span> activeSection = $(<span class="string">'.ms-left .ms-section.active'</span>);</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (!isMoving) { <span class="comment">//if theres any #</span></div><div class="line">		<span class="keyword">var</span> touchEvents = getEventsPage(e);</div><div class="line">		touchEndY = touchEvents[<span class="string">'y'</span>];</div><div class="line">		touchEndX = touchEvents[<span class="string">'x'</span>];</div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">//is the movement greater than the minimum resistance to scroll?</span></div><div class="line">		<span class="keyword">if</span> (<span class="built_in">Math</span>.abs(touchStartY - touchEndY) &gt; ($(<span class="built_in">window</span>).height() / <span class="number">100</span> * options.touchSensitivity)) {</div><div class="line"></div><div class="line">			<span class="keyword">if</span> (touchStartY &gt; touchEndY) {</div><div class="line">				$.fn.multiscroll.moveSectionDown();</div><div class="line"></div><div class="line">			} <span class="keyword">else</span> <span class="keyword">if</span> (touchEndY &gt; touchStartY) {</div><div class="line">				$.fn.multiscroll.moveSectionUp();</div><div class="line">			}</div><div class="line">		}</div><div class="line">	}</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>这里主要就是获取到touch事件的起始位置，然后当事件的移动距离大于敏感距离的话，根据起始位置的相对大小进行页面的上下移动。</p>
+<p>然后是检测3d效果支持，这里注释里写的比较明白，不做赘述。接下来便是一些样式上的调整。然后便是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'.ms-left .ms-section, .ms-right .ms-section'</span>).each(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">	<span class="keyword">var</span> sectionIndex = $(<span class="keyword">this</span>).index();</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (options.paddingTop || options.paddingBottom) {</div><div class="line">		$(<span class="keyword">this</span>).css(<span class="string">'padding'</span>, options.paddingTop + <span class="string">' 0 '</span> + options.paddingBottom + <span class="string">' 0'</span>);</div><div class="line">	}</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> options.sectionsColor[sectionIndex] !== <span class="string">'undefined'</span>) {</div><div class="line">		$(<span class="keyword">this</span>).css(<span class="string">'background-color'</span>, options.sectionsColor[sectionIndex]);</div><div class="line">	}</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> options.anchors[sectionIndex] !== <span class="string">'undefined'</span>) {</div><div class="line">		$(<span class="keyword">this</span>).attr(<span class="string">'data-anchor'</span>, options.anchors[sectionIndex]);</div><div class="line">	}</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (options.verticalCentered) {</div><div class="line">		addTableClass($(<span class="keyword">this</span>));</div><div class="line">	}</div><div class="line"></div><div class="line">	<span class="comment">//only for the left panel</span></div><div class="line">	<span class="keyword">if</span> ($(<span class="keyword">this</span>).closest(<span class="string">'.ms-left'</span>).length && options.navigation) {</div><div class="line">		<span class="keyword">var</span> link = <span class="string">''</span>;</div><div class="line">		<span class="keyword">if</span> (options.anchors.length) {</div><div class="line">			link = options.anchors[sectionIndex];</div><div class="line">		}</div><div class="line">		<span class="keyword">var</span> tooltip = options.navigationTooltips[sectionIndex];</div><div class="line">		<span class="keyword">if</span> (<span class="keyword">typeof</span> tooltip === <span class="string">'undefined'</span>) {</div><div class="line">			tooltip = <span class="string">''</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (options.navigation) {</div><div class="line">			nav.find(<span class="string">'ul'</span>).append(<span class="string">'&lt;li data-tooltip="'</span> + tooltip + <span class="string">'"&gt;&lt;a href="#'</span> + link + <span class="string">'"&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;'</span>);</div><div class="line">		}</div><div class="line">	}</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>这里对于每一个左右ms-section元素设置padding、background-color以及data-anchor属性。然后添加导航列表。接下来将右侧页面顺序倒置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//inverting the right panel</span></div><div class="line">$(<span class="string">'.ms-right'</span>).html( $(<span class="string">'.ms-right'</span>).find(<span class="string">'.ms-section'</span>).get().reverse());</div></pre></td></tr></table></figure>
+
+<p>这样使得左右页面是错位的，滚动的时候左侧页面自下向上滚动，而右侧页面自上向下滚动，于是刚刚好能拼合在一起。接下来的是整个页面的一个位置初始化，初始化active的section等。然后就是一些事件的添加，例如hashchange、keydown、点击导航等。然后便是移动页面的函数了。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Javascript/">Javascript</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2014/09/14/jQuery-plugin-multiscroll/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

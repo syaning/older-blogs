@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>链表相关习题（一） | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  <meta name="description" content="一、判断链表是否有环
+在开始之前，我们先来定义链表节点的结构，并且不封装节点成为链表，因此我们在之后的所有操作中都是直接操作节点。
+12345678910111213class Node(object):    def __init__(self, val):        self.val = val        self.next = Nonen1 = Node(1)n2 = Node(2)n3 = Node(3)n4 = Node(&#39;a&#39;)n5 = Node(&#39;b&#39;)n6 = Node(&#39;c&#39;)n7 = Node(10)n8 = Node(11)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="链表相关习题（一）"/>
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-19T12:09:06.000Z"><a href="/2014/08/19/linkedlist-questions-1/">Aug 19 2014</a></time>
+      
+      
+  
+    <h1 class="title">链表相关习题（一）</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、判断链表是否有环">一、判断链表是否有环</h3>
+<p>在开始之前，我们先来定义链表节点的结构，并且不封装节点成为链表，因此我们在之后的所有操作中都是直接操作节点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, val)</span>:</span></div><div class="line">        self.val = val</div><div class="line">        self.next = <span class="keyword">None</span></div><div class="line"></div><div class="line">n1 = Node(<span class="number">1</span>)</div><div class="line">n2 = Node(<span class="number">2</span>)</div><div class="line">n3 = Node(<span class="number">3</span>)</div><div class="line">n4 = Node(<span class="string">'a'</span>)</div><div class="line">n5 = Node(<span class="string">'b'</span>)</div><div class="line">n6 = Node(<span class="string">'c'</span>)</div><div class="line">n7 = Node(<span class="number">10</span>)</div><div class="line">n8 = Node(<span class="number">11</span>)</div></pre></td></tr></table></figure>
+
+<p><a id="more"></a></p>
+<h4 id="1-_判断链表中是否存在环">1. 判断链表中是否存在环</h4>
+<p>使用追赶的方法，声明两个指针slow和fast，从链表头开始，每次分别前进1步和2步。如果存在环，那么两者将会相遇，否则fast会遇到链表结尾退出。程序实现如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">lsta = n1</div><div class="line">n1.next = n2</div><div class="line">n2.next = n3</div><div class="line">n3.next = n4</div><div class="line">n4.next = n5</div><div class="line">n5.next = n6</div><div class="line">n6.next = n3</div><div class="line"></div><div class="line">lstb = n7</div><div class="line">n7.next = n8</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hasLoop</span><span class="params">(lst)</span>:</span></div><div class="line">    slow, fast = lst, lst</div><div class="line">    <span class="keyword">while</span> fast <span class="keyword">and</span> fast.next:</div><div class="line">        slow = slow.next</div><div class="line">        fast = fast.next.next</div><div class="line">        <span class="keyword">if</span> slow == fast:</div><div class="line">            <span class="keyword">break</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">not</span>(fast == <span class="keyword">None</span> <span class="keyword">or</span> fast.next == <span class="keyword">None</span>)</div><div class="line"></div><div class="line">print(hasLoop(lsta))  <span class="comment"># True</span></div><div class="line">print(hasLoop(lstb))  <span class="comment"># False</span></div></pre></td></tr></table></figure>
+
+<p>这里我们构建了lsta和lstb两条链表，其中lsta中有环，lstb中无环。</p>
+<p>也可以通过对链表中每一个元素计算哈希值，如果出现重复的哈希值，则说明有重复元素，即链表中包含环。代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hasLoop</span><span class="params">(lst)</span>:</span></div><div class="line">    hashTable = {}</div><div class="line">    temp = lst</div><div class="line">    <span class="keyword">while</span> temp:</div><div class="line">        hashVal = str(hash(temp))</div><div class="line">        <span class="keyword">if</span> hashTable.get(hashVal):</div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            hashTable[hashVal] = temp</div><div class="line">        temp = temp.next</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line">print(hasLoop(lsta))  <span class="comment"># True</span></div><div class="line">print(hasLoop(lstb))  <span class="comment"># False</span></div></pre></td></tr></table></figure>
+
+<h4 id="2-_求链表中环的长度">2. 求链表中环的长度</h4>
+<p>在确定了链表中有环后，我们让slow和fast继续前进，当它们再次相遇时，slow绕环走了1圈，fast绕环走了2圈，据此即可求出环的长度。示例代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loopLength</span><span class="params">(lst)</span>:</span></div><div class="line">    slow, fast = lst, lst</div><div class="line">    <span class="keyword">while</span> fast <span class="keyword">and</span> fast.next:</div><div class="line">        slow = slow.next</div><div class="line">        fast = fast.next.next</div><div class="line">        <span class="keyword">if</span> slow == fast:</div><div class="line">            <span class="keyword">break</span></div><div class="line">    </div><div class="line">    <span class="keyword">if</span> fast == <span class="keyword">None</span> <span class="keyword">or</span> fast.next == <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    </div><div class="line">    loopLen = <span class="number">1</span></div><div class="line">    slow = slow.next</div><div class="line">    fast = fast.next.next</div><div class="line">    <span class="keyword">while</span> slow != fast:</div><div class="line">        slow = slow.next</div><div class="line">        fast = fast.next.next</div><div class="line">        loopLen += <span class="number">1</span></div><div class="line">    </div><div class="line">    <span class="keyword">return</span> loopLen</div><div class="line"></div><div class="line">print(loopLength(lsta))  <span class="comment"># 4</span></div></pre></td></tr></table></figure>
+
+<h4 id="3-_求环的入口点">3. 求环的入口点</h4>
+<p>假设非环的部分长度为a，环的长度为b，slow和fast相遇时从环的起始点走了x，用s表示slow走过的路程，则<code>s=a+nb+x</code>，<code>2s=a+mb+x</code>，且m=n+2k，两式相减，即可得到<code>s=(m-n)b</code>，所以<code>(m-n)b=a+nb+x</code>，于是<code>a+x=(m-2n)b</code>。当slow和fast在x处相遇时，此时让fast从x处开始走a步（每次1步），即可到达环的入口点；同时令slow从链表头开始走a步，也刚好到达环的入口点。（事实上，由于之前slow和fast是第一次相遇，因此n=0）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLoopEntry</span><span class="params">(lst)</span>:</span></div><div class="line">    slow, fast = lst, lst</div><div class="line">    <span class="keyword">while</span> fast <span class="keyword">and</span> fast.next:</div><div class="line">        slow = slow.next</div><div class="line">        fast = fast.next.next</div><div class="line">        <span class="keyword">if</span> slow == fast:</div><div class="line">            <span class="keyword">break</span></div><div class="line">        </div><div class="line">    <span class="keyword">if</span> fast == <span class="keyword">None</span> <span class="keyword">or</span> fast.next == <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line"></div><div class="line">    slow = lst</div><div class="line">    <span class="keyword">while</span> slow != fast:</div><div class="line">        slow = slow.next</div><div class="line">        fast = fast.next</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> slow</div><div class="line"></div><div class="line">print(getLoopEntry(lsta).val)  <span class="comment"># 3</span></div></pre></td></tr></table></figure>
+
+<h4 id="4-_求有环链表的长度">4. 求有环链表的长度</h4>
+<p>2中求出了环的长度，3中可以得到非环部分的长度，相加即为环的长度。</p>
+<h4 id="参考文章">参考文章</h4>
+<p><a href="http://blog.csdn.net/thefutureisour/article/details/8174313" target="_blank" rel="external">如何判断链表中是否有环</a><br><a href="http://blog.csdn.net/thestoryofsnow/article/details/6822576" target="_blank" rel="external">链表中是否有环及环的起点 cycle detect 及确定环的长度</a></p>
+<h3 id="二、判断链表是否相交">二、判断链表是否相交</h3>
+<h4 id="1-_两个链表均无环">1. 两个链表均无环</h4>
+<p>两个无环链表相交，则这两个链表的最后一个元素必然相同，通过这个判断即可知道链表是否相交，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">lsta = n1</div><div class="line">n1.next = n2</div><div class="line">n2.next = n3</div><div class="line">n3.next = n4</div><div class="line"></div><div class="line">lstb = n5</div><div class="line">n5.next = n6</div><div class="line">n6.next = n3</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cross</span><span class="params">(lst1, lst2)</span>:</span></div><div class="line">    tail1, tail2 = lst1, lst2</div><div class="line">    </div><div class="line">    <span class="keyword">while</span> tail1.next != <span class="keyword">None</span>:</div><div class="line">        tail1 = tail1.next</div><div class="line">    <span class="keyword">while</span> tail2.next != <span class="keyword">None</span>:</div><div class="line">        tail2 = tail2.next</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> tail1 == tail2</div><div class="line"></div><div class="line">print(cross(lsta, lstb))  <span class="comment"># True</span></div></pre></td></tr></table></figure>
+
+<p>也可以将第一个链表的尾端与第二个链表的头相连，然后判断第一个链表中是否有环，如果有环，则两个链表相交，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cross</span><span class="params">(lst1, lst2)</span>:</span></div><div class="line">    tail1 = lst1</div><div class="line">    </div><div class="line">    <span class="keyword">while</span> tail1.next != <span class="keyword">None</span>:</div><div class="line">        tail1 = tail1.next</div><div class="line">    tail1.next = lst2</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> hasLoop(lst1)</div><div class="line"></div><div class="line">print(cross(lsta, lstb))  <span class="comment"># True</span></div></pre></td></tr></table></figure>
+
+<h4 id="2-_不知道是否有环">2. 不知道是否有环</h4>
+<p>首先判断两个链表是否有环，如果都无环，则回到问题1；如果一个有环一个无环，则它们必定不相交；考虑两个链表均有环的情况，如果两个链表都有环，则环必定是两个链表共有的，因此首先找出第一个链表的环入口，如果该入口在第二个链表上，则两个链表相交，否则不相交。</p>
+<h4 id="3-_找出两个链表的相交点">3. 找出两个链表的相交点</h4>
+<p>如果两个链表都无环，则使用问题1的第二种方法人为构环，回到求有环链表的环入口点问题；如果两个链都有环，则首先求出两个链表的长度La和Lb,它们的差值为<code>L=|La-Lb|</code>，然后让长的链表先走L，然后同时开始走，当他们相遇时即为交点。</p>
+<h4 id="参考文章-1">参考文章</h4>
+<p><a href="http://blog.csdn.net/kevinzhangyang/article/details/6637503" target="_blank" rel="external">判断链表是否有环及两链表是否相交</a><br><a href="http://blog.csdn.net/liuxialong/article/details/6556096" target="_blank" rel="external">编程之美：判断两链表是否相交</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/DS&Algorithm/">DS&Algorithm</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://syaning.github.io/2014/08/19/linkedlist-questions-1/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

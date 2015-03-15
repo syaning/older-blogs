@@ -1,0 +1,571 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java | Alex</title>
+  <meta name="author" content="Alex Sun">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Alex"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alex" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Alex</a></h1>
+  <h2><a href="/">viva la vida</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title category">Java</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-16T08:55:58.000Z"><a href="/2014/04/16/Java-XML/">Apr 16 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/16/Java-XML/">Java解析XML</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>应用程序经常会与xml文档进行交互，因此需要对xml文档进行解析，因此需要用到解析器。解析器是用来分析xml文档，并对信息做一些特定处理的应用程序，通常我们使用已有的解析器而不必自行编写解析器。至于DOM和SAX，则是解析器常用的两种解析API。</p>
+<p>DOM 是用与平台和语言无关的方式表示 XML 文档的官方 W3C 标准。DOM 是以层次结构组织的节点或信息片断的集合。这个层次结构允许开发人员在树中寻找特定信息。分析该结构通常需要加载整个文档和构造层次结构，然后才能做任何工作。由于它是基于信息层次的，因而DOM被认为是基于树或基于对象的。而SAX是一个事件驱动的API。SAX分析经过其的XML流，并产生相应的事件。SAX API 允许开发者捕获这些事件，并对它们进行操作。应用程序通过注册自身，以接受XML解析器遇到文档不同部分而发出的信息。</p>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/04/16/Java-XML/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-18T08:51:31.000Z"><a href="/2014/03/18/Java-thread-3/">Mar 18 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/18/Java-thread-3/">Java多线程(三)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="七、线程池">七、线程池</h3>
+<p>在面向对象编程中，创建和销毁对象是很费时间的，因为创建一个对象要获取内存资源或者其它更多资源。在Java中更是如此，虚拟机将试图跟踪每一个对象，以便能够在对象销毁后进行垃圾回收。所以提高服务程序效率的一个手段就是尽可能减少创建和销毁对象的次数，特别是一些很耗资源的对象创建和销毁。如何利用已有对象来服务就是一个需要解决的关键问题，其实这就是一些”池化资源”技术产生的原因。比如线程池、数据库连接池正是遵循这一思想而产生的。</p>
+<p>线程池的作用就是限制系统中执行线程的数量。根据系统的环境情况，可以自动或手动设置线程数量，达到运行的最佳效果；少了浪费了系统资源，多了造成系统拥挤效率不高。用线程池控制线程数量，其他线程排队等候。一个任务执行完毕，再从队列中取最前面的任务开始执行。若队列中没有等待任务，线程池的这一资源处于等待。当一个新任务需要运行时，如果线程池中有等待的工作线程，就可以开始运行了；否则进入等待队列。</p>
+<p>使用线程池，减少了创建和销毁线程的次数，每个工作线程都可以被重复利用，可执行多个任务。可以根据系统的承受能力，调整线程池中工作线线程的数目，防止因为消耗过多的内存而导致服务器负荷过重。</p>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/18/Java-thread-3/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-18T08:47:19.000Z"><a href="/2014/03/18/Java-thread-2/">Mar 18 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/18/Java-thread-2/">Java多线程(二)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="五、线程同步">五、线程同步</h3>
+<p>Java中的线程同步主要有两种方法：synchronized关键字和synchronized语句块。</p>
+<h4 id="1-synchronized关键字">1.synchronized关键字</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">execute</span>();</div></pre></td></tr></table></figure>
+
+<p>可以使用synchronized关键字来修饰一个方法，此时该方法叫做同步方法。synchronized其实就是一种加锁机制。对于实例方法，要给调用该方法的对象加锁；对于静态方法，给该类加锁。如果一个线程通过一个对象来调用同步的实例（或者动态）方法，首先会给该对象（或该类）加锁，然后执行方法，然后解锁。在解锁之前，另一个调用该对象（或该类）中方法的线程都将被阻塞，直到解锁。当同步方法执行完或者产生异常时，会自动释放锁。</p>
+<h4 id="2-synchronized语句块">2.synchronized语句块</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">synchronized</span>(object){</div><div class="line">    <span class="comment">// do something</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>synchronized不仅可以给调用方法的对象或者类加锁，还可以给任何对象加锁。同步语句允许设置方法中的部分代码同步，而不必要求整个方法同步，增强了程序的并发能力。因此，synchronized方法是一种粗粒度的并发控制，某一时刻，只能有一个线程执行该synchronized方法；而synchronized块则是一种细粒度的并发控制，只会将块中的代码同步，位于方法内、synchronized块之外的其他代码是可以被多个线程同时访问到的。<br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/18/Java-thread-2/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-18T08:41:02.000Z"><a href="/2014/03/18/Java-thread-1/">Mar 18 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/18/Java-thread-1/">Java多线程(一)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、基础概念">一、基础概念</h3>
+<h4 id="1-_线程">1. 线程</h4>
+<p>线程就是程序中单独顺序的流控制，它本身不能运行，只能用于程序中。（线程是程序内的顺序控制流，只能使用分配给程序的资源和环境）</p>
+<h4 id="2-_进程">2. 进程</h4>
+<p>执行中的程序。程序是静态的概念，进程是动态的概念。一个进程可以包含一个或多个线程（至少一个）。</p>
+<h4 id="3-_线程与进程的区别">3. 线程与进程的区别</h4>
+<ul>
+<li>多个进程的内部数据和状态都是完全独立的，而多线程是共享一块内存空间和一组系统资源，有可能互相影响。</li>
+<li>线程本身的数据通常只有寄存器数据，以及一个程序执行时使用的堆栈，所以线程的切换负担比进程切换的负担要小。</li>
+<li>多线程程序比多进程程序需要更少的管理费用。</li>
+<li>进程是重量级的任务，需要分配给它们独立的地址空间，进程间通信是昂贵和受限的，进程间的转换也是很需要花费的。</li>
+<li>线程是轻量级的，它们共享相同的地址空间并且共同分享同一个进程，线程间的通信是便宜的，线程间的转换也是低成本的。</li>
+</ul>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/18/Java-thread-1/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-17T08:33:56.000Z"><a href="/2014/03/17/Java-IO-6/">Mar 17 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/17/Java-IO-6/">Java I/O(六)——一般使用原则</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、按数据来源（去向）分类：">一、按数据来源（去向）分类：</h3>
+<ol>
+<li>是文件: FileInputStream, FileOutputStream, FileReader, FileWriter</li>
+<li>是 byte[]: ByteArrayInputStream, ByteArrayOutputStream</li>
+<li>是 Char[]: CharArrayReader, CharArrayWriter</li>
+<li>是 String: StringBufferInputStream, StringBufferOuputStream, StringReader, StringWriter</li>
+<li>网络数据流: InputStream, OutputStream, Reader, Writer</li>
+</ol>
+<h3 id="二、按是否格式化输出分：">二、按是否格式化输出分：</h3>
+<ol>
+<li>要格式化输出: PrintStream, PrintWriter</li>
+</ol>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/17/Java-IO-6/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-17T08:29:07.000Z"><a href="/2014/03/17/Java-IO-5/">Mar 17 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/17/Java-IO-5/">Java I/O(五)——对应关系</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="字节流的输入与输出的对应">字节流的输入与输出的对应</h3>
+<p><img src="/2014/03/17/Java-IO-5/java_io_stream.jpg" alt=""><br>上图中蓝色的为主要的对应部分，红色的部分就是不对应部分。绿色的虚线部分代表这些流一般要搭配使用。蓝色的部分是IO字节流的主要组成部分，存在极强的对称关系。关于搭配使用的三对类补充一下：ObjectInputStream/ObjectOutputStream和DataInputStream/DataOutputStream主要是要求写对象/数据和读对象/数据的次序要保持一致，否则轻则不能得到正确的数据，重则抛出异常(一般会如此)；PipedInputStream/PipedOutputStream在创建时一般就一起创建，调用它们的读写方法时会检查对方是否存在。<br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/17/Java-IO-5/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-17T08:26:25.000Z"><a href="/2014/03/17/Java-IO-4/">Mar 17 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/17/Java-IO-4/">Java I/O(四)——Reader/Writer</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Reader和Writer属于字符流（文本I/O），区别于Stream的字节流（二进制I/O）。java.io中的Reader和Writer是两个抽象类，下面将详细介绍。</p>
+<h3 id="Reader">Reader</h3>
+<p><img src="/2014/03/17/Java-IO-4/java.io_.Reader.gif" alt=""><br>在上面的关系图中可以看出：</p>
+<ol>
+<li>Reader 是所有的输入字符流的父类，它是一个抽象类。</li>
+<li>CharReader、StringReader 是两种基本的介质流，它们分别从Char 数组、String中读取数据。PipedReader 是从与其它线程共用的管道中读取数据。</li>
+<li>BufferedReader 很明显就是一个装饰器，它和其子类负责装饰其它Reader 对象。</li>
+<li>FilterReader 是所有自定义具体装饰流的父类，其子类PushbackReader 对Reader 对象进行装饰，会增加一个行号。</li>
+<li>InputStreamReader 是一个连接字节流和字符流的桥梁，它将字节流转变为字符流。FileReader可以说是一个达到此功能、常用的工具类，在其源代码中明显使用了将FileInputStream 转变为Reader 的方法。</li>
+</ol>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/17/Java-IO-4/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-17T08:24:28.000Z"><a href="/2014/03/17/Java-IO-3/">Mar 17 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/17/Java-IO-3/">Java I/O(三)——OutputStream综述</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>OutputStream是一个抽象类，其整体结构如下：<br><img src="/2014/03/17/Java-IO-3/java.io_.OutputStream.gif" alt=""><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/17/Java-IO-3/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-17T08:20:01.000Z"><a href="/2014/03/17/Java-IO-2/">Mar 17 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/17/Java-IO-2/">Java I/O(二)——InputStream综述</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>InputStream是一个抽象类，其整体结构如下：<br><img src="/2014/03/17/Java-IO-2/java.io_.InputStream.gif" alt=""><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/17/Java-IO-2/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-17T08:17:18.000Z"><a href="/2014/03/17/Java-IO-1/">Mar 17 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/17/Java-IO-1/">Java I/O(一)——概述</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Java IO一般包含两个部分：java.io包中堵塞型IO；java.nio包中的非堵塞型IO，通常称为New IO。系统运行的瓶颈一般在于IO操作，一般打开某个IO通道需要大量的时间，同时端口中不一定就有足够的数据，这样read方法就一直等待读取此端口的内容，从而浪费大量的系统资源。此时可能会想到使用java 的多线程技术，但是在当前进程中创建线程也是要花费一定的时间和系统资源的，因此不一定可取。Java New IO的非堵塞技术主要采用了Observer模式，就是有一个具体的观察者监测IO端口，如果有数据进入就会立即通知相应的应用程序。这样我们就避免建立多个线程，同时也避免了read等待的时间。</p>
+<p>本篇主要讲述java的堵塞型IO，java.io包中有着众多的类和接口，大概可以分为三部分：1、流式部分，即IO的主体部分；2、非流式部分，主要包含一些辅助流式部分的类，如：File、RandomAccessFile和FileDescriptor等；3、文件读取部分的与安全相关的类，如：SerializablePermission类。流式部分可以概括为：两个对应一个桥梁。两个对应指：字节流(Byte Stream)和字符流(Char Stream)的对应；输入和输出的对应。一个桥梁指：从字节流到字符流的桥梁，对应于输入和输出为 InputStreamReader 和 OutputStreamWriter。</p>
+<p>在流的具体类中又可以具体分为介质流和过滤流。介质流(Media Stream 或者称为原始流Raw Stream)主要指一些基本的流，他们主要是从具体的介质上，如：文件、内存缓冲区(Byte 数组、Char 数组、StringBuffer 对象)等，读取数据；过滤流(Filter Stream)主要指所有 FilterInputStream/FilterOutputStream 和 FilterReader/FilterWriter 的子类，主要是对其包装的类进行某些特定的处理，如：缓存等。</p>
+<h3 id="参考文章">参考文章</h3>
+<p><a href="http://blog.csdn.net/ilibaba/article/details/3955799" target="_blank" rel="external">java中的io系统详解</a><br><a href="http://m.blog.csdn.net/blog/baobeiSimple/1713797" target="_blank" rel="external">Java IO</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+  
+    <a href="/categories/Java/page/2/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:syaning.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2014/09/20/MongoDB-register-windows-service/">将MongoDB注册为Windows服务</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/14/jQuery-plugin-multiscroll/">jQuery插件multiscroll研究</a>
+      </li>
+    
+      <li>
+        <a href="/2014/09/10/string-array-questions-1/">字符串及数组练习题（一）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/20/linkedlist-questions-2/">链表相关习题（二）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/08/19/linkedlist-questions-1/">链表相关习题（一）</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>3</small></li>
+  
+    <li><a href="/categories/Computer-System/">Computer System</a><small>1</small></li>
+  
+    <li><a href="/categories/DB/">DB</a><small>1</small></li>
+  
+    <li><a href="/categories/DS&Algorithm/">DS&amp;Algorithm</a><small>3</small></li>
+  
+    <li><a href="/categories/HTML5/">HTML5</a><small>4</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/categories/Javascript/">Javascript</a><small>10</small></li>
+  
+    <li><a href="/categories/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/categories/Node/">Node</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">Archives</h3>
+    <ul class="entry">
+      <li><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count"><small>5</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count"><small>2</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count"><small>1</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">April 2014</a><span class="archive-list-count"><small>7</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count"><small>15</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count"><small>3</small></span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06">June 2013</a><span class="archive-list-count"><small>7</small></span></li></ul></li>
+    </ul>
+    </div>
+  </div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Alex Sun
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
